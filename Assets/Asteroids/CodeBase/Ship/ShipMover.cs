@@ -1,4 +1,3 @@
-using System;
 using Asteroids.CodeBase.Input;
 using UnityEngine;
 
@@ -8,6 +7,7 @@ namespace Asteroids.CodeBase
     public class ShipMover : MonoBehaviour
     {
         [SerializeField] private float _acceleration = 5f;
+        [SerializeField] private float _deceleration = 0.5f;
         [SerializeField] private float _maxSpeed = 10f;
 
         private ShipInput _input;
@@ -29,6 +29,14 @@ namespace Asteroids.CodeBase
             _rigidbody.AddRelativeForce(_input.MoveInput * _acceleration * Time.deltaTime * Vector2.up, ForceMode2D.Force);
             
             _rigidbody.velocity = Vector2.ClampMagnitude(_rigidbody.velocity, _maxSpeed);
+
+            if (_input.MoveInput <= 0)
+            {
+                float velocityX = Mathf.Lerp(_rigidbody.velocity.x, 0, _deceleration * Time.deltaTime);
+                float velocityY = Mathf.Lerp(_rigidbody.velocity.y, 0, _deceleration * Time.deltaTime);
+
+                _rigidbody.velocity = new Vector2(velocityX, velocityY);
+            }
         }
     }
 }
