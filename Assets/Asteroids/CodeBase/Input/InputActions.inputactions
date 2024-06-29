@@ -1,0 +1,105 @@
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "ShipInput",
+            "id": "cc78083b-137b-4acf-83b5-4f03b97afe74",
+            "actions": [
+                {
+                    "name": "Moved",
+                    "type": "Button",
+                    "id": "8e8a7d42-f25f-4f47-ada8-26bcda2de928",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LookTo",
+                    "type": "Value",
+                    "id": "76b9d228-f0d6-4ad2-8506-16b99ac36406",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "BulletShooted",
+                    "type": "Button",
+                    "id": "8139fe75-4f76-4a8e-b42e-ee1d9172e692",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LaserShooted",
+                    "type": "Button",
+                    "id": "623ad0a7-ae9a-4d9a-87d1-ccb476bdcd95",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8585286c-35f5-46df-ae43-a1881e08049f",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LookTo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93d4f8c6-982f-42f6-9936-a91b19ff01f6",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Moved",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "35a08cb1-b522-4bd9-a0a7-4638d652600b",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Moved",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7dcc0176-0b0d-448d-849e-e8b0c30876cd",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BulletShooted",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93237be1-dea5-4e2c-ad55-50e38bd3fd4c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LaserShooted",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
