@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4434399045315431881}
   - component: {fileID: 7897851440954990864}
   - component: {fileID: 6987198074224343197}
+  - component: {fileID: 1264360654851417383}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -115,8 +116,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e1a8ea41200a341a482f55d15ee8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 0}
-  _bulletPoints: []
+  _bullet: {fileID: 9106014266892048820, guid: 2ea96cc0d646c184187692583494f645, type: 3}
+  _bulletPoints:
+  - {fileID: 7939841624677678363}
+  - {fileID: 8800216699514495293}
+  _laser: {fileID: -7716242131946035472, guid: 01854e2dc0cf68f4bbe6dc33c04a3355, type: 3}
+  _laserPoint: {fileID: 7778171531437305965}
+--- !u!114 &1264360654851417383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850673243579092215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4092df670f90fbe459e0f376cc65d501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5035291005360432231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,5 +198,20 @@ PrefabInstance:
 --- !u!4 &2416463358496590935 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7235581332528932912, guid: 18f580618cc120942ab10c33f459ac3f, type: 3}
+  m_PrefabInstance: {fileID: 5035291005360432231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7778171531437305965 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3319557210079106058, guid: 18f580618cc120942ab10c33f459ac3f, type: 3}
+  m_PrefabInstance: {fileID: 5035291005360432231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7939841624677678363 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3156752438975764860, guid: 18f580618cc120942ab10c33f459ac3f, type: 3}
+  m_PrefabInstance: {fileID: 5035291005360432231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8800216699514495293 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4593764029129803098, guid: 18f580618cc120942ab10c33f459ac3f, type: 3}
   m_PrefabInstance: {fileID: 5035291005360432231}
   m_PrefabAsset: {fileID: 0}
