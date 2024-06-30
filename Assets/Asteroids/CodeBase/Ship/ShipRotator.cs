@@ -1,7 +1,7 @@
 using Asteroids.CodeBase.Input;
 using UnityEngine;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.Ship
 {
     [RequireComponent(typeof(ShipInput), typeof(Rigidbody2D))]
     public class ShipRotator : MonoBehaviour

@@ -1,60 +1,49 @@
-using System.Collections;
+using Asteroids.CodeBase.Ammunitions;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.Pool;
 
 namespace Asteroids.CodeBase
 {
-    public class Spawner : MonoBehaviour
+    public abstract class Spawner<T> where T : Ammunition
     {
-        [SerializeField] private Enemie[] _enemies;
-        [SerializeField] private AsteroidSmall _asteroidSmall;
-        [SerializeField] private float _spawnRadius = 5f;
-        [SerializeField] private float _spawnTime = 3f;
-        [SerializeField] private int _countAsteroidsSmall = 3;
-
-        [SerializeField] private ShipMover _target;
-
-        private Coroutine _spawnEnemieJob;
+        protected ObjectPool<T> Pool;
         
-        private void OnEnable()
+        private T _prefab;
+        private int _capacity = 20;
+        private int _maxSize = 50;
+
+        protected Spawner(T prefab, int capacity, int maxSize)
         {
-            _spawnEnemieJob = StartCoroutine(SpawnEnemie());
-        }
-
-        private void OnDisable()
-        {
-            StopCoroutine(_spawnEnemieJob);
-        }
-
-        private IEnumerator SpawnEnemie()
-        {
-            WaitForSeconds wait = new WaitForSeconds(_spawnTime);
-
-            while (true)
-            {
-                float angle = Random.Range(0, Mathf.PI * 2);
-                Vector3 position = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * _spawnRadius;
-                position += transform.position;
-
-                int enemieIndex = Random.Range(0, _enemies.Length);
+            _prefab = prefab;
+            _capacity = capacity;
+            _maxSize = maxSize;
             
-                Enemie enemie = Instantiate(_enemies[enemieIndex], position, Quaternion.identity);
-                
-                if(enemie is UFO ufo)
-                    ufo.Construct(_target.transform);
-                else if (enemie is Asteroid)
-                    enemie.Destroyed += OnAsteroidDestroyed;
-
-                yield return wait;
-            }
+            Pool = new ObjectPool<T>(CreateObject, OnGetObject, OnReleaseObject, OnDestroyObject, false, _capacity, _maxSize);
         }
-
-        private void OnAsteroidDestroyed(Vector2 position)
+        
+        public void Spawn(Vector2 position, Vector3 direction)
         {
-            for (int i = 0; i < _countAsteroidsSmall; i++)
-            {
-                Instantiate(_asteroidSmall, position, Quaternion.identity);
-            }
+            T obj = Pool.Get();
+            
+            obj.transform.position = position;
+            obj.transform.rotation = Quaternion.Euler(direction);
         }
+
+        protected virtual T CreateObject()
+        {
+            T obj = Object.Instantiate(_prefab, Vector2.zero, Quaternion.identity);
+            obj.gameObject.SetActive(false);
+            
+            return obj;
+        }
+
+        protected virtual void OnGetObject(T obj) => 
+            obj.gameObject.SetActive(true);
+
+        protected virtual void OnReleaseObject(T obj) => 
+            obj.gameObject.SetActive(false);
+
+        protected virtual void OnDestroyObject(T obj) => 
+            Object.Destroy(obj.gameObject);
     }
 }

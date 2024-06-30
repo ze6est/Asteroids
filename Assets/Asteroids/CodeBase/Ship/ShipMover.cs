@@ -12,6 +12,8 @@ namespace Asteroids.CodeBase
 
         private ShipInput _input;
         private Rigidbody2D _rigidbody;
+        
+        public float Velocity { get; private set; }
 
         private void Awake()
         {
@@ -37,6 +39,8 @@ namespace Asteroids.CodeBase
 
                 _rigidbody.velocity = new Vector2(velocityX, velocityY);
             }
+
+            Velocity = transform.InverseTransformDirection(_rigidbody.velocity).y;
         }
     }
 }

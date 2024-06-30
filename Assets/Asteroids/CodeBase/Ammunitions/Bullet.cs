@@ -5,12 +5,13 @@ namespace Asteroids.CodeBase.Ammunitions
     [RequireComponent(typeof(Rigidbody2D))]
     public class Bullet : Ammunition
     {
-        private void OnCollisionEnter2D(Collision2D collision)
+        protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (collision.collider.TryGetComponent(out Enemie enemie))
+            base.OnTriggerEnter2D(other);
+            
+            if (other.TryGetComponent(out Enemie enemie))
             {
-                enemie.Crash();
-                Destroy(gameObject);
+                OnDisabled(this);
             }
         }
     }
