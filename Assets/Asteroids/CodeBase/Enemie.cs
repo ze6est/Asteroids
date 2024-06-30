@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Asteroids.CodeBase
 {
@@ -7,6 +8,14 @@ namespace Asteroids.CodeBase
         [SerializeField] protected float Speed;
         [SerializeField] protected Rigidbody2D Rigidbody;
 
+        public event UnityAction<Vector2> Destroyed;
+        
+        public void Crash()
+        {
+            Destroyed?.Invoke(transform.position);
+            Destroy(gameObject);
+        }
+        
         protected abstract void Move();
     }
 }

@@ -247,8 +247,10 @@ MonoBehaviour:
   _enemies:
   - {fileID: 3733387696212292816, guid: 44ad3be131a8738458607498a214159b, type: 3}
   - {fileID: 1366645582271173258, guid: e963fc7cff220db4a98d577a0a1f4fd3, type: 3}
+  _asteroidSmall: {fileID: 5077928995957435184, guid: c4b50f51673c78f4bbea7cc3594ba9e8, type: 3}
   _spawnRadius: 10
   _spawnTime: 3
+  _countAsteroidsSmall: 3
   _target: {fileID: 1435525204}
 --- !u!4 &794599199
 Transform:

@@ -6,9 +6,11 @@ namespace Asteroids.CodeBase
 {
     public class Spawner : MonoBehaviour
     {
-        [SerializeField] private Enemie[] _enemies; 
+        [SerializeField] private Enemie[] _enemies;
+        [SerializeField] private AsteroidSmall _asteroidSmall;
         [SerializeField] private float _spawnRadius = 5f;
         [SerializeField] private float _spawnTime = 3f;
+        [SerializeField] private int _countAsteroidsSmall = 3;
 
         [SerializeField] private ShipMover _target;
 
@@ -40,8 +42,18 @@ namespace Asteroids.CodeBase
                 
                 if(enemie is UFO ufo)
                     ufo.Construct(_target.transform);
+                else if (enemie is Asteroid)
+                    enemie.Destroyed += OnAsteroidDestroyed;
 
                 yield return wait;
+            }
+        }
+
+        private void OnAsteroidDestroyed(Vector2 position)
+        {
+            for (int i = 0; i < _countAsteroidsSmall; i++)
+            {
+                Instantiate(_asteroidSmall, position, Quaternion.identity);
             }
         }
     }

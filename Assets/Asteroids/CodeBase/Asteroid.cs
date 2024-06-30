@@ -13,7 +13,6 @@ namespace Asteroids.CodeBase
         private void Start()
         {
             _direction = GetDirectionNormalized();
-            Debug.Log(_direction);
         }
 
         private void Update()
