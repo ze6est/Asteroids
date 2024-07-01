@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &136517200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4019255552319874679, guid: ca8c2d8139d2c384b9a0b9c0b0f71f42, type: 3}
+  m_PrefabInstance: {fileID: 5634361383579590238}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6184747807201744925441bcfc139d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &354599630
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +305,7 @@ GameObject:
   - component: {fileID: 794599199}
   - component: {fileID: 794599198}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: EnemieSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,6 +368,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189fbd2b7dcf43f4ba42ef42d5094782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1781435325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3007088248481602774, guid: ca8c2d8139d2c384b9a0b9c0b0f71f42, type: 3}
+  m_PrefabInstance: {fileID: 5634361383579590238}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1829479922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1829479924}
+  - component: {fileID: 1829479923}
+  m_Layer: 0
+  m_Name: ScoreCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1829479923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829479922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124762e329c0d0d4795607feaa49592e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1829479924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829479922}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2055369640
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +659,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5658853784292642031, guid: ca8c2d8139d2c384b9a0b9c0b0f71f42, type: 3}
+      propertyPath: _score
+      value: 
+      objectReference: {fileID: 1781435325}
+    - target: {fileID: 5658853784292642031, guid: ca8c2d8139d2c384b9a0b9c0b0f71f42, type: 3}
+      propertyPath: _scoreCounter
+      value: 
+      objectReference: {fileID: 1829479923}
     - target: {fileID: 6634743024271924555, guid: ca8c2d8139d2c384b9a0b9c0b0f71f42, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -750,6 +824,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 6987198074224343197, guid: 2baa7d10fb33b904388c1f06bba56a30, type: 3}
+      propertyPath: _scoreCounter
+      value: 
+      objectReference: {fileID: 1829479923}
+    - target: {fileID: 7646836146342584245, guid: 2baa7d10fb33b904388c1f06bba56a30, type: 3}
+      propertyPath: _restartWindow
+      value: 
+      objectReference: {fileID: 136517200}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

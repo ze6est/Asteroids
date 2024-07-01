@@ -1,4 +1,5 @@
 using Asteroids.CodeBase.Ammunitions;
+using UnityEngine.Events;
 
 namespace Asteroids.CodeBase
 {
@@ -8,11 +9,14 @@ namespace Asteroids.CodeBase
         {
         }
         
+        public event UnityAction EnemieDestroyed;
+
         protected override Ammunition CreateObject()
         {
             Ammunition ammunition = base.CreateObject();
 
             ammunition.Disabled += ReturnObjectToPool;
+            ammunition.EnemieDestroyed += OnEnemieDestroyed;
 
             return ammunition;
         }
@@ -22,5 +26,9 @@ namespace Asteroids.CodeBase
             Pool.Release(ammunition);
         }
 
+        private void OnEnemieDestroyed()
+        {
+            EnemieDestroyed?.Invoke();
+        }
     }
 }

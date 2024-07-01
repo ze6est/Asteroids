@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.Enemies
 {
     public abstract class Enemie : MonoBehaviour
     {

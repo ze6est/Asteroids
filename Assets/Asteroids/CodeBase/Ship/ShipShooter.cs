@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Asteroids.CodeBase.Ammunitions;
 using Asteroids.CodeBase.Input;
@@ -19,6 +18,9 @@ namespace Asteroids.CodeBase.Ship
         [SerializeField] private Transform _laserPoint;
         [SerializeField] private int _maxLaserCharges = 10;
         [SerializeField] private float _laserFailureTime = 10;
+
+        [Header("ScoreCounter")] [SerializeField]
+        private ScoreCounter _scoreCounter;
         
         private ShipInput _input;
         private AmmunitionSpawner _laserSpawner;
@@ -27,8 +29,6 @@ namespace Asteroids.CodeBase.Ship
         private bool _isRecharged;
         private int _currentLaserCharges;
         private float _currentLaserFailureTime;
-
-        private Coroutine _rechargeJob;
 
         public event UnityAction<int> LaserChargesChanged;
         public event UnityAction<float> LaserFailureTimeChanged;
@@ -48,6 +48,9 @@ namespace Asteroids.CodeBase.Ship
             
             LaserChargesChanged?.Invoke(_currentLaserCharges);
             LaserFailureTimeChanged?.Invoke(_currentLaserFailureTime);
+            
+            _scoreCounter.Subscribe(_laserSpawner);
+            _scoreCounter.Subscribe(_bulletSpawner);
         }
 
         private void OnEnable()
@@ -81,7 +84,7 @@ namespace Asteroids.CodeBase.Ship
 
             if (_currentLaserCharges <= 0)
             {
-                _rechargeJob = StartCoroutine(Recharge());
+                StartCoroutine(Recharge());
                 _isRecharged = false;
             }
         }

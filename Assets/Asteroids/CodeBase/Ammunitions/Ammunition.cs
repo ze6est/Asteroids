@@ -1,4 +1,4 @@
-using System;
+using Asteroids.CodeBase.Enemies;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +13,7 @@ namespace Asteroids.CodeBase.Ammunitions
         private Rigidbody2D _rigidbody;
 
         public event UnityAction<Ammunition> Disabled;
+        public event UnityAction EnemieDestroyed;
         
         private void Awake()
         {
@@ -45,6 +46,7 @@ namespace Asteroids.CodeBase.Ammunitions
             if (other.TryGetComponent(out Enemie enemie))
             {
                 enemie.Crash();
+                EnemieDestroyed?.Invoke();
             }
         }
     }
