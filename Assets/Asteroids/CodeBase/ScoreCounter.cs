@@ -13,12 +13,16 @@ namespace Asteroids.CodeBase
 
         public event UnityAction<int> ScoreChanged;
 
+        private void Start()
+        {
+            _score = 0;
+            ScoreChanged?.Invoke(_score);
+        }
+
         private void OnDestroy()
         {
             foreach (AmmunitionSpawner ammunitionSpawner in _ammunitionSpawners)
-            {
                 ammunitionSpawner.EnemieDestroyed -= OnEnemieDestroyed;
-            }
         }
 
         public void Subscribe(AmmunitionSpawner ammunitionSpawner)

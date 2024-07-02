@@ -1,7 +1,4 @@
 namespace Asteroids.CodeBase.Ammunitions
 {
-    public class Laser : Ammunition
-    {
-        
-    }
+    public class Laser : Ammunition{}
 }

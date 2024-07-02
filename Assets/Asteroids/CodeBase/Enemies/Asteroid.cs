@@ -1,8 +1,7 @@
-using Asteroids.CodeBase.Enemies;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.Enemies
 {
     public class Asteroid : Enemie
     {
@@ -11,15 +10,11 @@ namespace Asteroids.CodeBase
         
         private Vector2 _direction;
 
-        private void Start()
-        {
+        private void Start() => 
             _direction = GetDirectionNormalized();
-        }
 
-        private void Update()
-        {
+        private void Update() => 
             Move();
-        }
 
         protected override void Move()
         {

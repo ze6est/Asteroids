@@ -21,10 +21,8 @@ namespace Asteroids.CodeBase.Ship
             _camera = Camera.main;
         }
 
-        private void Update()
-        {
+        private void Update() => 
             Rotate();
-        }
 
         private void Rotate()
         {

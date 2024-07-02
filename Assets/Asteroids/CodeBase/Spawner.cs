@@ -8,17 +8,15 @@ namespace Asteroids.CodeBase
     {
         protected ObjectPool<T> Pool;
         
-        private T _prefab;
-        private int _capacity = 20;
-        private int _maxSize = 50;
+        private readonly T _prefab;
+        private readonly Transform _container;
 
-        protected Spawner(T prefab, int capacity, int maxSize)
+        protected Spawner(T prefab, int capacity, int maxSize, Transform container)
         {
             _prefab = prefab;
-            _capacity = capacity;
-            _maxSize = maxSize;
+            _container = container;
             
-            Pool = new ObjectPool<T>(CreateObject, OnGetObject, OnReleaseObject, OnDestroyObject, false, _capacity, _maxSize);
+            Pool = new ObjectPool<T>(CreateObject, OnGetObject, OnReleaseObject, OnDestroyObject, false, capacity, maxSize);
         }
         
         public void Spawn(Vector2 position, Vector3 direction)
@@ -33,6 +31,7 @@ namespace Asteroids.CodeBase
         {
             T obj = Object.Instantiate(_prefab, Vector2.zero, Quaternion.identity);
             obj.gameObject.SetActive(false);
+            obj.transform.parent = _container;
             
             return obj;
         }

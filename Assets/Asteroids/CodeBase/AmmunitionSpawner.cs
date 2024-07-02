@@ -1,13 +1,12 @@
 using Asteroids.CodeBase.Ammunitions;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Asteroids.CodeBase
 {
     public class AmmunitionSpawner : Spawner<Ammunition>
     {
-        public AmmunitionSpawner(Ammunition prefab, int capacity, int maxSize) : base(prefab, capacity, maxSize)
-        {
-        }
+        public AmmunitionSpawner(Ammunition prefab, int capacity, int maxSize, Transform container) : base(prefab, capacity, maxSize, container){}
         
         public event UnityAction EnemieDestroyed;
 
@@ -21,14 +20,10 @@ namespace Asteroids.CodeBase
             return ammunition;
         }
 
-        private void ReturnObjectToPool(Ammunition ammunition)
-        { 
+        private void ReturnObjectToPool(Ammunition ammunition) => 
             Pool.Release(ammunition);
-        }
 
-        private void OnEnemieDestroyed()
-        {
+        private void OnEnemieDestroyed() => 
             EnemieDestroyed?.Invoke();
-        }
     }
 }

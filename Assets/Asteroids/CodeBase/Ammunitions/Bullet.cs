@@ -11,9 +11,7 @@ namespace Asteroids.CodeBase.Ammunitions
             base.OnTriggerEnter2D(other);
             
             if (other.TryGetComponent(out Enemie enemie))
-            {
                 OnDisabled(this);
-            }
         }
     }
 }

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8967512567612745490}
   - component: {fileID: 4434399045315431881}
   - component: {fileID: 7897851440954990864}
-  - component: {fileID: 7646836146342584245}
   - component: {fileID: 6987198074224343197}
+  - component: {fileID: 4904726874078824657}
   - component: {fileID: 1264360654851417383}
   m_Layer: 0
   m_Name: Ship
@@ -142,18 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
---- !u!114 &7646836146342584245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6850673243579092215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd753e6ffc7c1d4fa59ac1a6f8c1006, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6987198074224343197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +162,19 @@ MonoBehaviour:
   _laserPoint: {fileID: 7778171531437305965}
   _maxLaserCharges: 10
   _laserFailureTime: 10
+  _scoreCounter: {fileID: 0}
+--- !u!114 &4904726874078824657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850673243579092215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1f2b122b97c944a8fcddbff851e94e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1264360654851417383
 MonoBehaviour:
   m_ObjectHideFlags: 0

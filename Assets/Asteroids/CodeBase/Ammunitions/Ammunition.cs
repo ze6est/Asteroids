@@ -15,20 +15,14 @@ namespace Asteroids.CodeBase.Ammunitions
         public event UnityAction<Ammunition> Disabled;
         public event UnityAction EnemieDestroyed;
         
-        private void Awake()
-        {
+        private void Awake() => 
             _rigidbody = GetComponent<Rigidbody2D>();
-        }
 
-        private void Update()
-        {
+        private void Update() => 
             Move();
-        }
-        
-        protected virtual void OnDisabled(Ammunition ammunition)
-        {
+
+        protected virtual void OnDisabled(Ammunition ammunition) => 
             Disabled?.Invoke(ammunition);
-        }
 
         private void Move()
         {
@@ -39,9 +33,7 @@ namespace Asteroids.CodeBase.Ammunitions
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent<Destroyer>(out _))
-            {
                 OnDisabled(this);
-            }
             
             if (other.TryGetComponent(out Enemie enemie))
             {

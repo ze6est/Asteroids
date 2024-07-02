@@ -36,8 +36,8 @@ namespace Asteroids.CodeBase.Ship
         private void Awake()
         {
             _input = GetComponent<ShipInput>();
-            _laserSpawner = new AmmunitionSpawner(_laser, 10, 10);
-            _bulletSpawner = new AmmunitionSpawner(_bullet, 20, 50);
+            _laserSpawner = new AmmunitionSpawner(_laser, 10, 10, transform);
+            _bulletSpawner = new AmmunitionSpawner(_bullet, 20, 50, transform);
         }
 
         private void Start()
@@ -68,9 +68,7 @@ namespace Asteroids.CodeBase.Ship
         private void OnBulletShooted()
         {
             foreach (Transform bulletPoint in _bulletPoints)
-            {
                 _bulletSpawner.Spawn(bulletPoint.position, bulletPoint.rotation.eulerAngles);
-            }
         }
         
         private void OnLaserShooted()

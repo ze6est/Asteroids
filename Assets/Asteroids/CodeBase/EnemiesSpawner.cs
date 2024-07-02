@@ -1,5 +1,6 @@
 using System.Collections;
 using Asteroids.CodeBase.Enemies;
+using Asteroids.CodeBase.Ship;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,15 +18,11 @@ namespace Asteroids.CodeBase
 
         private Coroutine _spawnEnemieJob;
         
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _spawnEnemieJob = StartCoroutine(SpawnEnemie());
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             StopCoroutine(_spawnEnemieJob);
-        }
 
         private IEnumerator SpawnEnemie()
         {
@@ -40,6 +37,7 @@ namespace Asteroids.CodeBase
                 int enemieIndex = Random.Range(0, _enemies.Length);
             
                 Enemie enemie = Instantiate(_enemies[enemieIndex], position, Quaternion.identity);
+                enemie.transform.parent = transform;
                 
                 if(enemie is UFO ufo)
                     ufo.Construct(_target.transform);
@@ -54,7 +52,8 @@ namespace Asteroids.CodeBase
         {
             for (int i = 0; i < _countAsteroidsSmall; i++)
             {
-                Instantiate(_asteroidSmall, position, Quaternion.identity);
+                Enemie enemie = Instantiate(_asteroidSmall, position, Quaternion.identity);
+                enemie.transform.parent = transform;
             }
         }
     }

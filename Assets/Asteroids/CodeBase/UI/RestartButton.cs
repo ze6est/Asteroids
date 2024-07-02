@@ -2,25 +2,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.UI
 {
-    public class Restarter : MonoBehaviour
+    public class RestartButton : MonoBehaviour
     {
         [SerializeField] private Button _restartButton;
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _restartButton.onClick.AddListener(Restart);
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _restartButton.onClick.RemoveListener(Restart);
-        }
 
-        public void Restart()
-        {
+        private void Restart() => 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
     }
 }

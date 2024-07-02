@@ -1,7 +1,7 @@
 using Asteroids.CodeBase.Input;
 using UnityEngine;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.Ship
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(ShipInput))]
     public class ShipMover : MonoBehaviour
@@ -21,10 +21,8 @@ namespace Asteroids.CodeBase
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        private void Update()
-        {
+        private void Update() => 
             Move();
-        }
 
         private void Move()
         {

@@ -1,9 +1,6 @@
 using UnityEngine;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.UI
 {
-    public class RestartWindow : MonoBehaviour
-    {
-    
-    }
+    public class RestartWindow : MonoBehaviour{}
 }

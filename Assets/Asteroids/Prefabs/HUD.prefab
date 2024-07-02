@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreCounter: {fileID: 0}
-  _score: {fileID: 0}
+  _score: {fileID: 3007088248481602774}
 --- !u!1 &6159293695911879073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,6 +1300,7 @@ GameObject:
   - component: {fileID: 7810932746546488029}
   - component: {fileID: 7356447809280661204}
   - component: {fileID: 4677198081608647340}
+  - component: {fileID: 7345341557549246012}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -1322,7 +1323,7 @@ RectTransform:
   - {fileID: 1399645185185644432}
   - {fileID: 4479733091315343266}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1392,3 +1393,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7345341557549246012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6634743024271924555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db4a76fd917c79747ae38668911125f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

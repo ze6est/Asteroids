@@ -1,21 +1,16 @@
-using Asteroids.CodeBase.Enemies;
 using UnityEngine;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.Enemies
 {
     public class AsteroidSmall : Enemie
     {
         private Vector2 _randomDirection;
         
-        private void Start()
-        {
+        private void Start() => 
             _randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-        }
 
-        private void Update()
-        {
+        private void Update() => 
             Move();
-        }
 
         protected override void Move()
         {
