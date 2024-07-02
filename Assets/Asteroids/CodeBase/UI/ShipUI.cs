@@ -1,4 +1,4 @@
-using Asteroids.CodeBase.Ship;
+using Asteroids.CodeBase.Ships;
 using TMPro;
 using UnityEngine;
 
@@ -6,16 +6,21 @@ namespace Asteroids.CodeBase.UI
 {
     public class ShipUI : MonoBehaviour
     {
-        [SerializeField] private ShipMover _shipMover;
-        [SerializeField] private ShipShooter _shipShooter;
-
         [SerializeField] private TextMeshProUGUI _coordinates;
         [SerializeField] private TextMeshProUGUI _angleRotation;
         [SerializeField] private TextMeshProUGUI _speed;
         [SerializeField] private TextMeshProUGUI _laserCharges;
         [SerializeField] private TextMeshProUGUI _laserFailureTime;
 
+        private ShipMover _shipMover;
+        private ShipShooter _shipShooter;
         private Transform _ship;
+
+        public void Construct(ShipMover shipMover, ShipShooter shipShooter)
+        {
+            _shipMover = shipMover;
+            _shipShooter = shipShooter;
+        }
 
         private void Awake()
         {

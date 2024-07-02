@@ -1,9 +1,9 @@
 using Asteroids.CodeBase.Input;
 using UnityEngine;
 
-namespace Asteroids.CodeBase.Ship
+namespace Asteroids.CodeBase.Ships
 {
-    [RequireComponent(typeof(ShipInput), typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class ShipRotator : MonoBehaviour
     {
         [SerializeField] private float _speed = 2;
@@ -14,11 +14,15 @@ namespace Asteroids.CodeBase.Ship
 
         private Coroutine _rotateJob;
 
+        public void Construct(ShipInput shipInput, Camera camera)
+        {
+            _input = shipInput;
+            _camera = camera;
+        }
+        
         private void Awake()
         {
-            _input = GetComponent<ShipInput>();
             _rigidbody = GetComponent<Rigidbody2D>();
-            _camera = Camera.main;
         }
 
         private void Update() => 

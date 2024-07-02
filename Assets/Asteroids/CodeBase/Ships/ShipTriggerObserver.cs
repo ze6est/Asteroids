@@ -2,7 +2,7 @@ using Asteroids.CodeBase.Enemies;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Asteroids.CodeBase.Ship
+namespace Asteroids.CodeBase.Ships
 {
     public class ShipTriggerObserver : MonoBehaviour
     {

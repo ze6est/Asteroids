@@ -2,7 +2,7 @@ using Asteroids.CodeBase.Enemies;
 using Asteroids.CodeBase.UI;
 using UnityEngine;
 
-namespace Asteroids.CodeBase.Ship
+namespace Asteroids.CodeBase.Ships
 {
     public class ShipDestroyer : MonoBehaviour
     {

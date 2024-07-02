@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 942293400202238679}
   - component: {fileID: 611675068130876480}
   - component: {fileID: 2617506384687004376}
-  - component: {fileID: 8967512567612745490}
+  - component: {fileID: 2004677090320348686}
   - component: {fileID: 4434399045315431881}
   - component: {fileID: 7897851440954990864}
   - component: {fileID: 6987198074224343197}
@@ -38,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 2416463358496590935}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &611675068130876480
 Rigidbody2D:
@@ -102,7 +102,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &8967512567612745490
+--- !u!114 &2004677090320348686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6850673243579092215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ffe322d3bbce554d987893df214f8f9, type: 3}
+  m_Script: {fileID: 11500000, guid: fd08c791ed237eb43a75c16460c40719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4434399045315431881
@@ -162,7 +162,6 @@ MonoBehaviour:
   _laserPoint: {fileID: 7778171531437305965}
   _maxLaserCharges: 10
   _laserFailureTime: 10
-  _scoreCounter: {fileID: 0}
 --- !u!114 &4904726874078824657
 MonoBehaviour:
   m_ObjectHideFlags: 0

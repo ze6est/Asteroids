@@ -1,20 +1,20 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
 
 namespace Asteroids.CodeBase
 {
-    public class ScoreCounter : MonoBehaviour
+    public class ScoreCounter
     {
-        private List<AmmunitionSpawner> _ammunitionSpawners = new();
+        private List<AmmunitionSpawner> _ammunitionSpawners;
 
         private int _score;
 
         public event UnityAction<int> ScoreChanged;
 
-        private void Start()
+        public ScoreCounter()
         {
+            _ammunitionSpawners = new List<AmmunitionSpawner>();
+            
             _score = 0;
             ScoreChanged?.Invoke(_score);
         }

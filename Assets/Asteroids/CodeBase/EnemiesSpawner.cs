@@ -1,6 +1,6 @@
 using System.Collections;
 using Asteroids.CodeBase.Enemies;
-using Asteroids.CodeBase.Ship;
+using Asteroids.CodeBase.Ships;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,9 +14,14 @@ namespace Asteroids.CodeBase
         [SerializeField] private float _spawnTime = 3f;
         [SerializeField] private int _countAsteroidsSmall = 3;
 
-        [SerializeField] private ShipMover _target;
+        private Ship _target;
 
         private Coroutine _spawnEnemieJob;
+
+        public void Construct(Ship target)
+        {
+            _target = target;
+        }
         
         private void OnEnable() => 
             _spawnEnemieJob = StartCoroutine(SpawnEnemie());

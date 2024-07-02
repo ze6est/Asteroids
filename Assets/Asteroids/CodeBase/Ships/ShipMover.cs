@@ -1,9 +1,9 @@
 using Asteroids.CodeBase.Input;
 using UnityEngine;
 
-namespace Asteroids.CodeBase.Ship
+namespace Asteroids.CodeBase.Ships
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(ShipInput))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class ShipMover : MonoBehaviour
     {
         [SerializeField] private float _acceleration = 5f;
@@ -15,9 +15,13 @@ namespace Asteroids.CodeBase.Ship
         
         public float Velocity { get; private set; }
 
+        public void Construct(ShipInput shipInput)
+        {
+            _input = shipInput;
+        }
+        
         private void Awake()
         {
-            _input = GetComponent<ShipInput>();
             _rigidbody = GetComponent<Rigidbody2D>();
         }
 

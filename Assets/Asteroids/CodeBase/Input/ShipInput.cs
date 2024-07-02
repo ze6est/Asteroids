@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Asteroids.CodeBase.Input
 {
-    public class ShipInput : MonoBehaviour
+    public class ShipInput
     {
         private InputActions _input;
         
@@ -14,10 +14,10 @@ namespace Asteroids.CodeBase.Input
         public event UnityAction BulletShooted;
         public event UnityAction LaserShooted;
 
-        private void Awake() => 
-            _input = new InputActions();
+        public ShipInput(InputActions input) => 
+            _input = input;
 
-        private void OnEnable()
+        public void Enable()
         {
             _input.ShipInput.Enable();
 
@@ -31,7 +31,7 @@ namespace Asteroids.CodeBase.Input
             _input.ShipInput.LaserShooted.performed += OnLaserShooted;
         }
 
-        private void OnDisable()
+        public void Disable()
         {
             _input.ShipInput.Moved.performed -= OnMoved;
             _input.ShipInput.Moved.canceled -= OnMoved;

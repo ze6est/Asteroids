@@ -4,9 +4,8 @@ using Asteroids.CodeBase.Input;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Asteroids.CodeBase.Ship
+namespace Asteroids.CodeBase.Ships
 {
-    [RequireComponent(typeof(ShipInput))]
     public class ShipShooter : MonoBehaviour
     {
         [Header("Bullet Settings")]
@@ -18,9 +17,6 @@ namespace Asteroids.CodeBase.Ship
         [SerializeField] private Transform _laserPoint;
         [SerializeField] private int _maxLaserCharges = 10;
         [SerializeField] private float _laserFailureTime = 10;
-
-        [Header("ScoreCounter")] [SerializeField]
-        private ScoreCounter _scoreCounter;
         
         private ShipInput _input;
         private AmmunitionSpawner _laserSpawner;
@@ -33,9 +29,16 @@ namespace Asteroids.CodeBase.Ship
         public event UnityAction<int> LaserChargesChanged;
         public event UnityAction<float> LaserFailureTimeChanged;
 
+        public void Construct(ShipInput shipInput)
+        {
+            _input = shipInput;
+            
+            _input.BulletShooted += OnBulletShooted;
+            _input.LaserShooted += OnLaserShooted;
+        }
+        
         private void Awake()
         {
-            _input = GetComponent<ShipInput>();
             _laserSpawner = new AmmunitionSpawner(_laser, 10, 10, transform);
             _bulletSpawner = new AmmunitionSpawner(_bullet, 20, 50, transform);
         }
@@ -48,15 +51,6 @@ namespace Asteroids.CodeBase.Ship
             
             LaserChargesChanged?.Invoke(_currentLaserCharges);
             LaserFailureTimeChanged?.Invoke(_currentLaserFailureTime);
-            
-            _scoreCounter.Subscribe(_laserSpawner);
-            _scoreCounter.Subscribe(_bulletSpawner);
-        }
-
-        private void OnEnable()
-        {
-            _input.BulletShooted += OnBulletShooted;
-            _input.LaserShooted += OnLaserShooted;
         }
 
         private void OnDisable()

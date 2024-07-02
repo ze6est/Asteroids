@@ -1,4 +1,4 @@
-using Asteroids.CodeBase.Ship;
+using Asteroids.CodeBase.Ships;
 using Asteroids.CodeBase.UI;
 using UnityEngine;
 
@@ -6,9 +6,15 @@ namespace Asteroids.CodeBase
 {
     public class Restarter : MonoBehaviour
     {
-        [SerializeField] private RestartWindow _restartWindow;
-        [SerializeField] private ShipTriggerObserver _shipTriggerObserver;
+        private RestartWindow _restartWindow;
+        private ShipTriggerObserver _shipTriggerObserver;
 
+        public void Construct(ShipTriggerObserver shipTriggerObserver, RestartWindow restartWindow)
+        {
+            _shipTriggerObserver = shipTriggerObserver;
+            _restartWindow = restartWindow;
+        }
+        
         private void Start()
         {
             Time.timeScale = 1;

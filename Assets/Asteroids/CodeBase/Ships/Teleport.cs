@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Asteroids.CodeBase.Ship
+namespace Asteroids.CodeBase.Ships
 {
     public class Teleport : MonoBehaviour
     {
