@@ -1,5 +1,6 @@
 using System.Collections;
 using Asteroids.CodeBase.Enemies;
+using Asteroids.CodeBase.Factories.EnemiesFactories;
 using Asteroids.CodeBase.Ships;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,23 +9,27 @@ namespace Asteroids.CodeBase.Spawners.EnemiesSpawners
 {
     public class EnemiesSpawner : MonoBehaviour
     {
-        [SerializeField] private Enemie[] _enemies;
-        [SerializeField] private AsteroidSmall _asteroidSmall;
         [SerializeField] private float _spawnRadius = 5f;
         [SerializeField] private float _spawnTime = 3f;
         [SerializeField] private int _countAsteroidsSmall = 3;
 
+        private AsteroidsFactory _asteroidsFactory;
+        private UFOFactory _ufoFactory;
+        private AsteroidSmallFactory _asteroidSmallFactory;
+        
         private Ship _target;
 
         private Coroutine _spawnEnemieJob;
 
-        public void Construct(Ship target)
+        public void Construct(AsteroidsFactory asteroidsFactory, UFOFactory ufoFactory, AsteroidSmallFactory asteroidSmallFactory, Ship ship)
         {
-            _target = target;
-        }
-        
-        private void OnEnable() => 
+            _asteroidsFactory = asteroidsFactory;
+            _ufoFactory = ufoFactory;
+            _asteroidSmallFactory = asteroidSmallFactory;
+            _target = ship;
+            
             _spawnEnemieJob = StartCoroutine(SpawnEnemie());
+        }
 
         private void OnDisable() => 
             StopCoroutine(_spawnEnemieJob);
@@ -39,15 +44,20 @@ namespace Asteroids.CodeBase.Spawners.EnemiesSpawners
                 Vector3 position = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * _spawnRadius;
                 position += transform.position;
 
-                int enemieIndex = Random.Range(0, _enemies.Length);
-            
-                Enemie enemie = Instantiate(_enemies[enemieIndex], position, Quaternion.identity);
-                enemie.transform.parent = transform;
-                
-                if(enemie is UFO ufo)
+                int random = Random.Range(0, 101);
+
+                if (random > 50)
+                {
+                    Asteroid asteroid = _asteroidsFactory.GetObject();
+                    asteroid.Destroyed += OnAsteroidDestroyed;
+                    asteroid.transform.position = position;
+                }
+                else
+                {
+                    UFO ufo = _ufoFactory.GetObject();
                     ufo.Construct(_target.transform);
-                else if (enemie is Asteroid)
-                    enemie.Destroyed += OnAsteroidDestroyed;
+                    ufo.transform.position = position;
+                }
 
                 yield return wait;
             }
@@ -57,8 +67,8 @@ namespace Asteroids.CodeBase.Spawners.EnemiesSpawners
         {
             for (int i = 0; i < _countAsteroidsSmall; i++)
             {
-                Enemie enemie = Instantiate(_asteroidSmall, position, Quaternion.identity);
-                enemie.transform.parent = transform;
+                AsteroidSmall asteroidSmall = _asteroidSmallFactory.GetObject();
+                asteroidSmall.transform.position = position;
             }
         }
     }

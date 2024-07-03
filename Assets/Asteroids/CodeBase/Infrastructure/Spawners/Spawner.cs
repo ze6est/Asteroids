@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Asteroids.CodeBase.Spawners
 {
-    public class Spawner<T> where T : MonoBehaviour
+    public abstract class Spawner<T> where T : MonoBehaviour
     {
         private Factory<T> _factory;
-        
-        public Spawner(Factory<T> factory)
+
+        protected Spawner(Factory<T> factory)
         {
             _factory = factory;
         }

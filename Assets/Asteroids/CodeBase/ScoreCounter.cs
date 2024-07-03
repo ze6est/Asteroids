@@ -6,6 +6,7 @@ namespace Asteroids.CodeBase
 {
     public class ScoreCounter
     {
+        /*
         private List<AmmunitionFactory> _ammunitionSpawners;
 
         private int _score;
@@ -39,5 +40,6 @@ namespace Asteroids.CodeBase
             
             ScoreChanged?.Invoke(_score);
         }
+        */
     }
 }

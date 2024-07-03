@@ -5,8 +5,8 @@ namespace Asteroids.CodeBase.Enemies
 {
     public class Asteroid : Enemie
     {
-        [SerializeField] private float _maxMovePositionX = 3;
-        [SerializeField] private float _maxMovePositionY = 2f;
+        [SerializeField] private float _maxMovePositionX = 2;
+        [SerializeField] private float _maxMovePositionY = 1f;
         
         private Vector2 _direction;
 

@@ -21,6 +21,7 @@ namespace Asteroids.CodeBase.Input
             _input.ShipInput.Enable();
 
             _input.ShipInput.Moved.performed += OnMoved;
+            _input.ShipInput.Moved.canceled += OnMoved;
             
             _input.ShipInput.LookTo.performed += OnLookTo;
             _input.ShipInput.LookTo.canceled += OnLookTo;

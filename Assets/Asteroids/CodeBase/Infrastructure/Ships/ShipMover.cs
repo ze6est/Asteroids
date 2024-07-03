@@ -11,7 +11,7 @@ namespace Asteroids.CodeBase.Ships
         
         private Rigidbody2D _rigidbody;
 
-        private float _moveInput;
+        [SerializeField] private float _moveInput;
         
         public float Velocity { get; private set; }
         

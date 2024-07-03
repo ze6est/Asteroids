@@ -1,10 +1,10 @@
-using TMPro;
 using UnityEngine;
 
 namespace Asteroids.CodeBase.UI
 {
     public class ScoreCounterView : MonoBehaviour
     {
+        /*
         [SerializeField] private TextMeshProUGUI _score;
 
         private ScoreCounter _scoreCounter;
@@ -20,5 +20,6 @@ namespace Asteroids.CodeBase.UI
 
         private void OnScoreChanged(int score) => 
             _score.text = $"Score: {score}";
+            */
     }
 }

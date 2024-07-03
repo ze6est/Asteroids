@@ -5,7 +5,7 @@ namespace Asteroids.CodeBase.Factories
 {
     public abstract class Factory<T> where T : MonoBehaviour
     {
-        protected ObjectPool<T> Pool;
+        private ObjectPool<T> _pool;
         
         private readonly T _prefab;
         private readonly Transform _container;
@@ -15,11 +15,11 @@ namespace Asteroids.CodeBase.Factories
             _prefab = prefab;
             _container = container;
             
-            Pool = new ObjectPool<T>(CreateObject, OnGetObject, OnReleaseObject, OnDestroyObject, false, capacity, maxSize);
+            _pool = new ObjectPool<T>(CreateObject, OnGetObject, OnReleaseObject, OnDestroyObject, false, capacity, maxSize);
         }
         
         public T GetObject() => 
-            Pool.Get();
+            _pool.Get();
 
         protected virtual T CreateObject()
         {
