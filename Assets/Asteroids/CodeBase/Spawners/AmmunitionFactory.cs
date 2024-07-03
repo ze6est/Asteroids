@@ -1,12 +1,13 @@
 using Asteroids.CodeBase.Ammunitions;
+using Asteroids.CodeBase.Factories;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.Spawners
 {
-    public class AmmunitionSpawner : Spawner<Ammunition>
+    public class AmmunitionFactory : Factory<Ammunition>
     {
-        public AmmunitionSpawner(Ammunition prefab, int capacity, int maxSize, Transform container) : base(prefab, capacity, maxSize, container){}
+        public AmmunitionFactory(Ammunition prefab, int capacity, int maxSize, Transform container) : base(prefab, capacity, maxSize, container){}
         
         public event UnityAction EnemieDestroyed;
 

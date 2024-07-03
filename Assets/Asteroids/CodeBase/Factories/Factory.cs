@@ -1,17 +1,16 @@
-using Asteroids.CodeBase.Ammunitions;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.Factories
 {
-    public abstract class Spawner<T> where T : Ammunition
+    public abstract class Factory<T> where T : MonoBehaviour
     {
         protected ObjectPool<T> Pool;
         
         private readonly T _prefab;
         private readonly Transform _container;
 
-        protected Spawner(T prefab, int capacity, int maxSize, Transform container)
+        protected Factory(T prefab, int capacity, int maxSize, Transform container)
         {
             _prefab = prefab;
             _container = container;
@@ -19,13 +18,8 @@ namespace Asteroids.CodeBase
             Pool = new ObjectPool<T>(CreateObject, OnGetObject, OnReleaseObject, OnDestroyObject, false, capacity, maxSize);
         }
         
-        public void Spawn(Vector2 position, Vector3 direction)
-        {
-            T obj = Pool.Get();
-            
-            obj.transform.position = position;
-            obj.transform.rotation = Quaternion.Euler(direction);
-        }
+        public T GetObject() => 
+            Pool.Get();
 
         protected virtual T CreateObject()
         {
@@ -36,13 +30,13 @@ namespace Asteroids.CodeBase
             return obj;
         }
 
-        protected virtual void OnGetObject(T obj) => 
+        private void OnGetObject(T obj) => 
             obj.gameObject.SetActive(true);
 
-        protected virtual void OnReleaseObject(T obj) => 
+        private void OnReleaseObject(T obj) => 
             obj.gameObject.SetActive(false);
 
-        protected virtual void OnDestroyObject(T obj) => 
+        private void OnDestroyObject(T obj) => 
             Object.Destroy(obj.gameObject);
     }
 }

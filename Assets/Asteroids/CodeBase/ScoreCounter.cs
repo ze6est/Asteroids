@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Asteroids.CodeBase.Spawners;
 using UnityEngine.Events;
 
 namespace Asteroids.CodeBase
 {
     public class ScoreCounter
     {
-        private List<AmmunitionSpawner> _ammunitionSpawners;
+        private List<AmmunitionFactory> _ammunitionSpawners;
 
         private int _score;
 
@@ -13,7 +14,7 @@ namespace Asteroids.CodeBase
 
         public ScoreCounter()
         {
-            _ammunitionSpawners = new List<AmmunitionSpawner>();
+            _ammunitionSpawners = new List<AmmunitionFactory>();
             
             _score = 0;
             ScoreChanged?.Invoke(_score);
@@ -21,15 +22,15 @@ namespace Asteroids.CodeBase
 
         private void OnDestroy()
         {
-            foreach (AmmunitionSpawner ammunitionSpawner in _ammunitionSpawners)
+            foreach (AmmunitionFactory ammunitionSpawner in _ammunitionSpawners)
                 ammunitionSpawner.EnemieDestroyed -= OnEnemieDestroyed;
         }
 
-        public void Subscribe(AmmunitionSpawner ammunitionSpawner)
+        public void Subscribe(AmmunitionFactory ammunitionFactory)
         {
-            _ammunitionSpawners.Add(ammunitionSpawner);
+            _ammunitionSpawners.Add(ammunitionFactory);
 
-            ammunitionSpawner.EnemieDestroyed += OnEnemieDestroyed;
+            ammunitionFactory.EnemieDestroyed += OnEnemieDestroyed;
         }
 
         private void OnEnemieDestroyed()

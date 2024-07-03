@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3156752438975764860}
+  - component: {fileID: 2179906083494152195}
   m_Layer: 0
-  m_Name: BulletPoint
+  m_Name: BulletGun
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 7235581332528932912}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2179906083494152195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895403056329373213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f6e9415006e7140a803a71b0110e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5158637846502262706
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +77,7 @@ Transform:
   - {fileID: 3156752438975764860}
   - {fileID: 4593764029129803098}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5137517757412724286
 SpriteRenderer:
@@ -127,8 +140,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3319557210079106058}
+  - component: {fileID: 9119314770162464334}
   m_Layer: 0
-  m_Name: LaserPoint
+  m_Name: LaserGun
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -149,6 +163,18 @@ Transform:
   m_Father: {fileID: 7235581332528932912}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9119314770162464334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390285687056041058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485eb4d2c4b7cee4eb221aeeb300909d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8271289129663473167
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +184,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4593764029129803098}
+  - component: {fileID: 747664952382249364}
   m_Layer: 0
-  m_Name: BulletPoint
+  m_Name: BulletGun
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -180,3 +207,15 @@ Transform:
   m_Father: {fileID: 7235581332528932912}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &747664952382249364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8271289129663473167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f6e9415006e7140a803a71b0110e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

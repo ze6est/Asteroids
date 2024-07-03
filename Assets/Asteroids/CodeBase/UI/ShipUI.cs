@@ -22,8 +22,8 @@ namespace Asteroids.CodeBase.UI
             _shipShooter = shipShooter;
             
             _ship = _shipMover.transform;
-            _shipShooter.LaserChargesChanged += OnLaserChargesChanged;
-            _shipShooter.LaserFailureTimeChanged += OnLaserFailureTimeChanged;
+            //_shipShooter.LaserChargesChanged += OnLaserChargesChanged;
+            //_shipShooter.LaserFailureTimeChanged += OnLaserFailureTimeChanged;
         }
 
         private void Update()
@@ -39,8 +39,8 @@ namespace Asteroids.CodeBase.UI
         
         private void OnDestroy()
         {
-            _shipShooter.LaserChargesChanged -= OnLaserChargesChanged;
-            _shipShooter.LaserFailureTimeChanged -= OnLaserFailureTimeChanged;
+            //_shipShooter.LaserChargesChanged -= OnLaserChargesChanged;
+            //_shipShooter.LaserFailureTimeChanged -= OnLaserFailureTimeChanged;
         }
         
         private void OnLaserChargesChanged(int currentLaserCharges) => 

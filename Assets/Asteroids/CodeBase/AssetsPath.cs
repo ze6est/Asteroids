@@ -2,6 +2,8 @@ namespace Asteroids.CodeBase
 {
     public static class AssetsPath
     {
+        public const string LASER_PATH = "Prefabs/Ammunitions/Laser";
+        public const string BULLET_PATH = "Prefabs/Ammunitions/Bullet";
         public const string SHIP_PATH = "Prefabs/Ship";
         public const string ENEMIES_SPAWNER_PATH = "Prefabs/EnemieSpawner";
         public const string HUD_PATH = "Prefabs/HUD";

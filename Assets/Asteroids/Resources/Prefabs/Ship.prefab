@@ -154,11 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e1a8ea41200a341a482f55d15ee8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 9106014266892048820, guid: 2ea96cc0d646c184187692583494f645, type: 3}
   _bulletPoints:
   - {fileID: 7939841624677678363}
   - {fileID: 8800216699514495293}
-  _laser: {fileID: -7716242131946035472, guid: 01854e2dc0cf68f4bbe6dc33c04a3355, type: 3}
   _laserPoint: {fileID: 7778171531437305965}
   _maxLaserCharges: 10
   _laserFailureTime: 10

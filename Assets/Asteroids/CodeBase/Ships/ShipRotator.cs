@@ -23,10 +23,8 @@ namespace Asteroids.CodeBase.Ships
         private void Update() => 
             Rotate();
         
-        public void OnRotated(Vector2 lookTo)
-        {
+        public void OnRotated(Vector2 lookTo) => 
             _lookTo = lookTo;
-        }
 
         private void Rotate()
         {

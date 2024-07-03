@@ -4,7 +4,7 @@ using Asteroids.CodeBase.Ships;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Asteroids.CodeBase
+namespace Asteroids.CodeBase.Spawners.EnemiesSpawners
 {
     public class EnemiesSpawner : MonoBehaviour
     {

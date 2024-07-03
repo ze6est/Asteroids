@@ -11,22 +11,18 @@ namespace Asteroids.CodeBase.Ships
         
         private Rigidbody2D _rigidbody;
 
-        [SerializeField] private float _moveInput;
+        private float _moveInput;
         
         public float Velocity { get; private set; }
         
-        private void Awake()
-        {
+        private void Awake() => 
             _rigidbody = GetComponent<Rigidbody2D>();
-        }
 
         private void Update() => 
             Move();
 
-        public void OnMoved(float speed)
-        {
+        public void OnMoved(float speed) => 
             _moveInput = speed;
-        }
 
         private void Move()
         {
