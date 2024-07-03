@@ -115,4 +115,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4a76fd917c79747ae38668911125f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _restartWindow: {fileID: 0}

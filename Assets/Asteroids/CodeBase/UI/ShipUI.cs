@@ -20,10 +20,7 @@ namespace Asteroids.CodeBase.UI
         {
             _shipMover = shipMover;
             _shipShooter = shipShooter;
-        }
-
-        private void Awake()
-        {
+            
             _ship = _shipMover.transform;
             _shipShooter.LaserChargesChanged += OnLaserChargesChanged;
             _shipShooter.LaserFailureTimeChanged += OnLaserFailureTimeChanged;

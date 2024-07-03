@@ -1,6 +1,5 @@
 using System.Collections;
 using Asteroids.CodeBase.Ammunitions;
-using Asteroids.CodeBase.Input;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,7 +17,6 @@ namespace Asteroids.CodeBase.Ships
         [SerializeField] private int _maxLaserCharges = 10;
         [SerializeField] private float _laserFailureTime = 10;
         
-        private ShipInput _input;
         private AmmunitionSpawner _laserSpawner;
         private AmmunitionSpawner _bulletSpawner;
 
@@ -28,14 +26,6 @@ namespace Asteroids.CodeBase.Ships
 
         public event UnityAction<int> LaserChargesChanged;
         public event UnityAction<float> LaserFailureTimeChanged;
-
-        public void Construct(ShipInput shipInput)
-        {
-            _input = shipInput;
-            
-            _input.BulletShooted += OnBulletShooted;
-            _input.LaserShooted += OnLaserShooted;
-        }
         
         private void Awake()
         {
@@ -52,20 +42,14 @@ namespace Asteroids.CodeBase.Ships
             LaserChargesChanged?.Invoke(_currentLaserCharges);
             LaserFailureTimeChanged?.Invoke(_currentLaserFailureTime);
         }
-
-        private void OnDisable()
-        {
-            _input.BulletShooted -= OnBulletShooted;
-            _input.LaserShooted -= OnLaserShooted;
-        }
-
-        private void OnBulletShooted()
+        
+        public void OnBulletShooted()
         {
             foreach (Transform bulletPoint in _bulletPoints)
                 _bulletSpawner.Spawn(bulletPoint.position, bulletPoint.rotation.eulerAngles);
         }
         
-        private void OnLaserShooted()
+        public void OnLaserShooted()
         {
             if (_isRecharged)
             {
