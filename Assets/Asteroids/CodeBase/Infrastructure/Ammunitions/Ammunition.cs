@@ -11,8 +11,7 @@ namespace Asteroids.CodeBase.Ammunitions
         [SerializeField] private float _maxSpeed;
         
         private Rigidbody2D _rigidbody;
-
-        public event UnityAction<Ammunition> Disabled;
+        
         public event UnityAction EnemieDestroyed;
         
         private void Awake() => 
@@ -20,9 +19,6 @@ namespace Asteroids.CodeBase.Ammunitions
 
         private void Update() => 
             Move();
-
-        protected void OnDisabled(Ammunition ammunition) => 
-            Disabled?.Invoke(ammunition);
 
         private void Move()
         {
@@ -32,10 +28,7 @@ namespace Asteroids.CodeBase.Ammunitions
         
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<Destroyer>(out _))
-                OnDisabled(this);
-            
-            if (other.TryGetComponent(out Enemie enemie))
+            if (other.TryGetComponent(out Enemie _))
             {
                 EnemieDestroyed?.Invoke();
             }

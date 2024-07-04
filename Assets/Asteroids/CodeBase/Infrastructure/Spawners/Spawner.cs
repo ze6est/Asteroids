@@ -12,7 +12,7 @@ namespace Asteroids.CodeBase.Spawners
             _factory = factory;
         }
         
-        public void Spawn(Vector2 position, Quaternion rotation)
+        public virtual void Spawn(Vector2 position, Quaternion rotation)
         {
             T obj = _factory.GetObject(position);
             obj.transform.rotation = rotation;
