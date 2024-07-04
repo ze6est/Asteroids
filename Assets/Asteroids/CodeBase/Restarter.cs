@@ -13,13 +13,14 @@ namespace Asteroids.CodeBase
         {
             _shipTriggerObserver = shipTriggerObserver;
             _restartWindow = restartWindow;
+            
+            _restartWindow.gameObject.SetActive(false);
+            _shipTriggerObserver.Died += OnDied;
         }
         
         private void Start()
         {
             Time.timeScale = 1;
-            _restartWindow.gameObject.SetActive(false);
-            _shipTriggerObserver.Died += OnDied;
         }
 
         private void OnDestroy() => 

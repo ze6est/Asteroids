@@ -1,3 +1,4 @@
+using Asteroids.CodeBase.Guns;
 using Asteroids.CodeBase.Ships;
 using TMPro;
 using UnityEngine;
@@ -13,17 +14,17 @@ namespace Asteroids.CodeBase.UI
         [SerializeField] private TextMeshProUGUI _laserFailureTime;
 
         private ShipMover _shipMover;
-        private ShipShooter _shipShooter;
+        private LaserGun _laserGun;
         private Transform _ship;
 
-        public void Construct(ShipMover shipMover, ShipShooter shipShooter)
+        public void Construct(ShipMover shipMover, LaserGun laserGun)
         {
             _shipMover = shipMover;
-            _shipShooter = shipShooter;
+            _laserGun = laserGun;
             
             _ship = _shipMover.transform;
-            //_shipShooter.LaserChargesChanged += OnLaserChargesChanged;
-            //_shipShooter.LaserFailureTimeChanged += OnLaserFailureTimeChanged;
+            _laserGun.LaserChargesChanged += OnLaserChargesChanged;
+            _laserGun.LaserFailureTimeChanged += OnLaserFailureTimeChanged;
         }
 
         private void Update()
@@ -39,8 +40,8 @@ namespace Asteroids.CodeBase.UI
         
         private void OnDestroy()
         {
-            //_shipShooter.LaserChargesChanged -= OnLaserChargesChanged;
-            //_shipShooter.LaserFailureTimeChanged -= OnLaserFailureTimeChanged;
+            _laserGun.LaserChargesChanged -= OnLaserChargesChanged;
+            _laserGun.LaserFailureTimeChanged -= OnLaserFailureTimeChanged;
         }
         
         private void OnLaserChargesChanged(int currentLaserCharges) => 

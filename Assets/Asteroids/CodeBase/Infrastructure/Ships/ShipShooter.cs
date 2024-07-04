@@ -7,12 +7,12 @@ namespace Asteroids.CodeBase.Ships
     public class ShipShooter : MonoBehaviour
     {
         private List<BulletGun> _bulletsGun;
-        private List<LaserGun> _laserGuns;
+        private LaserGun _laserGun;
 
-        public void Construct(List<BulletGun> bulletGuns, List<LaserGun> laserGuns)
+        public void Construct(List<BulletGun> bulletGuns, LaserGun laserGun)
         {
             _bulletsGun = bulletGuns;
-            _laserGuns = laserGuns;
+            _laserGun = laserGun;
         }
         
         public void OnBulletShooted()
@@ -25,10 +25,7 @@ namespace Asteroids.CodeBase.Ships
         
         public void OnLaserShooted()
         {
-            foreach (var laserGun in _laserGuns)
-            {
-                laserGun.Shoot();
-            }
+            _laserGun.Shoot();
         }
     }
 }
