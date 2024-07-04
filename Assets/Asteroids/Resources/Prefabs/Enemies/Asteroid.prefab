@@ -111,8 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.5
   Rigidbody: {fileID: 7143439402446939222}
-  _maxMovePositionX: 3
-  _maxMovePositionY: 2
+  _maxMovePositionX: 2
+  _maxMovePositionY: 1
 --- !u!1001 &8004913318066830834
 PrefabInstance:
   m_ObjectHideFlags: 0

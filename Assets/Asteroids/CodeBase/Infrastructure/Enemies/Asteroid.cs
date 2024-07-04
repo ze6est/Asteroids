@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Asteroids.CodeBase.Enemies
@@ -10,11 +11,18 @@ namespace Asteroids.CodeBase.Enemies
         
         private Vector2 _direction;
 
-        private void Start() => 
-            _direction = GetDirectionNormalized();
+        public event UnityAction<Asteroid, Vector2> Destroyed;
 
         private void Update() => 
             Move();
+
+        public void CalculateDirectionNormalized()
+        {
+            float positionX = Random.Range(-_maxMovePositionX, _maxMovePositionX);
+            float positionY = Random.Range(-_maxMovePositionY, _maxMovePositionY);
+            
+            _direction = (new Vector3(positionX, positionY, 0) - transform.position).normalized;
+        }
 
         protected override void Move()
         {
@@ -22,12 +30,9 @@ namespace Asteroids.CodeBase.Enemies
             Rigidbody.velocity = Vector2.ClampMagnitude(Rigidbody.velocity, Speed);
         }
 
-        private Vector2 GetDirectionNormalized()
+        protected override void OnTriggerEnter2D(Collider2D other)
         {
-            float positionX = Random.Range(-_maxMovePositionX, _maxMovePositionX);
-            float positionY = Random.Range(-_maxMovePositionY, _maxMovePositionY);
-            
-            return (new Vector3(positionX, positionY, 0) - transform.position).normalized;
+            Destroyed?.Invoke(this, transform.position);
         }
     }
 }

@@ -1,5 +1,4 @@
 using Asteroids.CodeBase.Enemies;
-using Asteroids.CodeBase.Spawners;
 using UnityEngine;
 
 namespace Asteroids.CodeBase.Factories.EnemiesFactories

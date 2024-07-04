@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Pool;
+using Object = UnityEngine.Object;
 
 namespace Asteroids.CodeBase.Factories
 {
-    public abstract class Factory<T> where T : MonoBehaviour
+    public class Factory<T> where T : MonoBehaviour
     {
         private ObjectPool<T> _pool;
         
@@ -18,10 +19,17 @@ namespace Asteroids.CodeBase.Factories
             _pool = new ObjectPool<T>(CreateObject, OnGetObject, OnReleaseObject, OnDestroyObject, false, capacity, maxSize);
         }
         
-        public T GetObject() => 
-            _pool.Get();
+        public T GetObject(Vector3 position)
+        {
+            T obj = _pool.Get();
+            obj.transform.position = position;
+            return obj;
+        }
 
-        protected virtual T CreateObject()
+        public void Release(T obj) =>
+            _pool.Release(obj);
+
+        private T CreateObject()
         {
             T obj = Object.Instantiate(_prefab, Vector2.zero, Quaternion.identity);
             obj.gameObject.SetActive(false);

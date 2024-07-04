@@ -1,5 +1,4 @@
 using Asteroids.CodeBase.Ammunitions;
-using Asteroids.CodeBase.Spawners;
 using UnityEngine;
 
 namespace Asteroids.CodeBase.Factories.AmmunitionsFactories

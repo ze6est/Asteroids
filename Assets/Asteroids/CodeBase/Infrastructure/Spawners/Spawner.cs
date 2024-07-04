@@ -14,12 +14,8 @@ namespace Asteroids.CodeBase.Spawners
         
         public void Spawn(Vector2 position, Quaternion rotation)
         {
-            T obj = _factory.GetObject();
-
-            Transform objTransform = obj.transform;
-            
-            objTransform.position = position;
-            objTransform.rotation = rotation;
+            T obj = _factory.GetObject(position);
+            obj.transform.rotation = rotation;
         }
     }
 }

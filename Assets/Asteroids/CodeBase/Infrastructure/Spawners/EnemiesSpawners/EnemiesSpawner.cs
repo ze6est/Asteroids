@@ -28,13 +28,13 @@ namespace Asteroids.CodeBase.Spawners.EnemiesSpawners
             _asteroidSmallFactory = asteroidSmallFactory;
             _target = ship;
             
-            _spawnEnemieJob = StartCoroutine(SpawnEnemie());
+            _spawnEnemieJob = StartCoroutine(SpawnEnemies());
         }
 
         private void OnDisable() => 
             StopCoroutine(_spawnEnemieJob);
 
-        private IEnumerator SpawnEnemie()
+        private IEnumerator SpawnEnemies()
         {
             WaitForSeconds wait = new WaitForSeconds(_spawnTime);
 
@@ -48,28 +48,60 @@ namespace Asteroids.CodeBase.Spawners.EnemiesSpawners
 
                 if (random > 50)
                 {
-                    Asteroid asteroid = _asteroidsFactory.GetObject();
-                    asteroid.Destroyed += OnAsteroidDestroyed;
-                    asteroid.transform.position = position;
+                    Asteroid asteroid = _asteroidsFactory.GetObject(position);
+                    asteroid.CalculateDirectionNormalized();
+                    asteroid.Destroyed += OnEnemieDestroyed;
                 }
                 else
                 {
-                    UFO ufo = _ufoFactory.GetObject();
+                    Ufo ufo = _ufoFactory.GetObject(position);
                     ufo.Construct(_target.transform);
-                    ufo.transform.position = position;
+                    ufo.Destroyed += OnEnemieDestroyed;
                 }
 
                 yield return wait;
             }
         }
 
-        private void OnAsteroidDestroyed(Vector2 position)
+        private void OnEnemieDestroyed(Enemie enemie, Vector2 position)
+        {
+            switch (enemie)
+            {
+                case Asteroid asteroid:
+                    CrashAsteroid(asteroid, position);
+                    break;
+                case Ufo ufo:
+                    CrashUfo(ufo);
+                    break;
+                case AsteroidSmall asteroidSmall:
+                    CrachAsteroidSmall(asteroidSmall);
+                    break;
+            }
+        }
+
+        private void CrashAsteroid(Asteroid asteroid, Vector2 position)
         {
             for (int i = 0; i < _countAsteroidsSmall; i++)
             {
-                AsteroidSmall asteroidSmall = _asteroidSmallFactory.GetObject();
-                asteroidSmall.transform.position = position;
+                AsteroidSmall asteroidSmall = _asteroidSmallFactory.GetObject(position);
+                asteroidSmall.CalculateDirectionNormalized();
+                asteroidSmall.Destroyed += OnEnemieDestroyed;
             }
+            
+            asteroid.Destroyed -= OnEnemieDestroyed;
+            _asteroidsFactory.Release(asteroid);
+        }
+
+        private void CrashUfo(Ufo ufo)
+        {
+            ufo.Destroyed -= OnEnemieDestroyed;
+            _ufoFactory.Release(ufo);
+        }
+
+        private void CrachAsteroidSmall(AsteroidSmall asteroidSmall)
+        {
+            asteroidSmall.Destroyed -= OnEnemieDestroyed;
+            _asteroidSmallFactory.Release(asteroidSmall);
         }
     }
 }

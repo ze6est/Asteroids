@@ -21,7 +21,7 @@ namespace Asteroids.CodeBase.Ammunitions
         private void Update() => 
             Move();
 
-        protected virtual void OnDisabled(Ammunition ammunition) => 
+        protected void OnDisabled(Ammunition ammunition) => 
             Disabled?.Invoke(ammunition);
 
         private void Move()
@@ -37,7 +37,6 @@ namespace Asteroids.CodeBase.Ammunitions
             
             if (other.TryGetComponent(out Enemie enemie))
             {
-                enemie.Crash();
                 EnemieDestroyed?.Invoke();
             }
         }

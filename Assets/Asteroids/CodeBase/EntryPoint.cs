@@ -22,8 +22,10 @@ namespace Asteroids.CodeBase
 
         private EnemiesSpawner _enemiesSpawnerPrefab;
         private Asteroid _asteroidPrefab;
-        private UFO _ufoPrefab;
+        private Ufo _ufoPrefab;
         private AsteroidSmall _asteroidSmallPrefab;
+
+        private Destroyer _destroyerPrefab;
 
         private Ship _ship;
         private InputActions _input;
@@ -51,8 +53,10 @@ namespace Asteroids.CodeBase
 
             _enemiesSpawnerPrefab = Resources.Load<EnemiesSpawner>(AssetsPath.ENEMIES_SPAWNER_PATH);
             _asteroidPrefab = Resources.Load<Asteroid>(AssetsPath.ASTEROID_PATH);
-            _ufoPrefab = Resources.Load<UFO>(AssetsPath.UFO_PATH);
+            _ufoPrefab = Resources.Load<Ufo>(AssetsPath.UFO_PATH);
             _asteroidSmallPrefab = Resources.Load<AsteroidSmall>(AssetsPath.ASTEROID_SMALL_PREFAB);
+
+            _destroyerPrefab = Resources.Load<Destroyer>(AssetsPath.DESTROYER);
 
             //_hudPrefab = Resources.Load<Canvas>(AssetsPath.HUD_PATH);
             //_restartWindowPrefab = Resources.Load<RestartWindow>(AssetsPath.RESTART_WINDOW_PATH);
@@ -63,6 +67,7 @@ namespace Asteroids.CodeBase
         {
             _ship = Instantiate(_shipPrefab);
             _enemiesSpawner = Instantiate(_enemiesSpawnerPrefab);
+            Instantiate(_destroyerPrefab);
         }
         
         private void EnableInput()
