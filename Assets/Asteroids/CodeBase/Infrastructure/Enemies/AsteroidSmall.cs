@@ -9,6 +9,11 @@ namespace Asteroids.CodeBase.Enemies
         
         public event UnityAction<AsteroidSmall, Vector2> Destroyed;
 
+        public void Construct(float speed)
+        {
+            Speed = speed;
+        }
+        
         private void Update() => 
             Move();
 

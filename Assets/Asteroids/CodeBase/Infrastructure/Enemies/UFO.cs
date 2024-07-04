@@ -9,6 +9,11 @@ namespace Asteroids.CodeBase.Enemies
         
         public event UnityAction<Ufo, Vector2> Destroyed;
 
+        public void ConstructPrefab(float speed)
+        {
+            Speed = speed;
+        }
+        
         public void Construct(Transform target) => 
             _target = target;
 

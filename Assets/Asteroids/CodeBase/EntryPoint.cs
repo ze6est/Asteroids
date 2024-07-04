@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Asteroids.CodeBase.Ammunitions;
+using Asteroids.CodeBase.Configs;
 using Asteroids.CodeBase.Enemies;
 using Asteroids.CodeBase.Factories.AmmunitionsFactories;
 using Asteroids.CodeBase.Factories.EnemiesFactories;
@@ -27,8 +28,11 @@ namespace Asteroids.CodeBase
 
         private Destroyer _destroyerPrefab;
         private Canvas _hudPrefab;
-
+        
         private ScoreCounter _scoreCounter;
+
+        private ShipConfig _shipConfig;
+        private EnemiesConfig _enemiesConfig;
 
         private Ship _ship;
         private ShipTriggerObserver _shipTriggerObserver;
@@ -49,10 +53,15 @@ namespace Asteroids.CodeBase
         private void Awake()
         {
             LoadPrefabs();
+            LoadConfigs();
+            
+            ConstructAmmunitionsPrefabs();
+            ConstructEnemiesPrefab();
+            
             InstantiateWorld();
 
             EnableInput();
-
+            
             ConstructShip();
             ConstructEnemiesSpawner();
             
@@ -61,7 +70,6 @@ namespace Asteroids.CodeBase
             ConstructHud();
             
         }
-
 
         private void LoadPrefabs()
         {
@@ -79,6 +87,12 @@ namespace Asteroids.CodeBase
             _hudPrefab = Resources.Load<Canvas>(AssetsPath.HUD_PATH);
         }
 
+        private void LoadConfigs()
+        {
+            _shipConfig = Resources.Load<ShipConfig>(AssetsPath.SHIP_CONFIG_PATH);
+            _enemiesConfig = Resources.Load<EnemiesConfig>(AssetsPath.ENEMIES_CONFIG_PATH);
+        }
+
         private void InstantiateWorld()
         {
             _ship = Instantiate(_shipPrefab);
@@ -93,26 +107,45 @@ namespace Asteroids.CodeBase
             _shipInput = new ShipInput(_input);
             _shipInput.Enable();
         }
+
+        private void ConstructAmmunitionsPrefabs()
+        {
+            _bulletPrefab.Construct(_shipConfig.StartBulletSpeed, _shipConfig.MaxBulletSpeed);
+            _laserPrefab.Construct(_shipConfig.StartLaserSpeed, _shipConfig.MaxBulletSpeed);
+        }
+
+        private void ConstructEnemiesPrefab()
+        {
+            _asteroidPrefab.Construct(_enemiesConfig.AsteroidSpeed, _enemiesConfig.MaxMovePositionX, _enemiesConfig.MaxMovePositionY);
+            _ufoPrefab.ConstructPrefab(_enemiesConfig.UfoSpeed);
+            _asteroidSmallPrefab.Construct(_enemiesConfig.AsteroidSmallSpeed);
+        }
         
         private void ConstructShip()
         {
-            BulletsFactory bulletsFactory = new BulletsFactory(_bulletPrefab, 10, 10, _ship.transform);
+            BulletsFactory bulletsFactory = new BulletsFactory(_bulletPrefab, _shipConfig.CapacityBullets, _shipConfig.MaxCountBullets, _ship.transform);
             _bulletSpawner = new BulletSpawner(bulletsFactory);
 
-            LasersFactory lasersFactory = new LasersFactory(_laserPrefab, 10, 10, _ship.transform);
+            LasersFactory lasersFactory = new LasersFactory(_laserPrefab, _shipConfig.CapacityLasers, _shipConfig.MaxCountLasers, _ship.transform);
             _laserSpawner = new LaserSpawner(lasersFactory);
             
             List<BulletGun> bulletGuns = _ship.GetComponentsInChildren<BulletGun>().ToList();
             _laserGun = _ship.GetComponentInChildren<LaserGun>();
 
             if (_ship.TryGetComponent(out ShipMover shipMover))
+            {
                 _shipMover = shipMover;
+                shipMover.Construct(_shipConfig);
+            }
                 
             if(_ship.TryGetComponent(out ShipShooter shipShooter))
                 _shipShooter = shipShooter;
 
             if (_ship.TryGetComponent(out ShipRotator shipRotator))
+            {
                 _shipRotator = shipRotator;
+                shipRotator.Construct(_shipConfig);
+            }
 
             if (_ship.TryGetComponent(out ShipTriggerObserver shipTriggerObserver))
                 _shipTriggerObserver = shipTriggerObserver;

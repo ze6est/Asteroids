@@ -1,9 +1,10 @@
+using System;
 using Asteroids.CodeBase.Spawners.AmmunitionsSpawners;
 using UnityEngine.Events;
 
 namespace Asteroids.CodeBase
 {
-    public class ScoreCounter
+    public class ScoreCounter : IDisposable
     {
         private LaserSpawner _laserSpawner;
         private BulletSpawner _bulletSpawner;
@@ -21,10 +22,9 @@ namespace Asteroids.CodeBase
             _bulletSpawner.EnemyDestroyed += OnEnemieDestroyed;
             
             _score = 0;
-            ScoreChanged?.Invoke(_score);
         }
 
-        private void OnDestroy()
+        public void Dispose()
         {
             _laserSpawner.EnemyDestroyed -= OnEnemieDestroyed;
             _bulletSpawner.EnemyDestroyed -= OnEnemieDestroyed;

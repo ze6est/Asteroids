@@ -6,13 +6,20 @@ namespace Asteroids.CodeBase.Enemies
 {
     public class Asteroid : Enemie
     {
-        [SerializeField] private float _maxMovePositionX = 2;
-        [SerializeField] private float _maxMovePositionY = 1f;
+        [SerializeField] private float _maxMovePositionX;
+        [SerializeField] private float _maxMovePositionY;
         
         private Vector2 _direction;
 
         public event UnityAction<Asteroid, Vector2> Destroyed;
 
+        public void Construct(float speed, float maxMovePositionX, float maxMovePositionY)
+        {
+            Speed = speed;
+            _maxMovePositionX = maxMovePositionX;
+            _maxMovePositionY = maxMovePositionY;
+        }
+        
         private void Update() => 
             Move();
 

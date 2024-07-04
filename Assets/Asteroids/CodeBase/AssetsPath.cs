@@ -2,6 +2,8 @@ namespace Asteroids.CodeBase
 {
     public static class AssetsPath
     {
+        public const string ENEMIES_CONFIG_PATH = "Configs/EnemiesConfig";
+        public const string SHIP_CONFIG_PATH = "Configs/ShipConfig";
         public const string DESTROYER = "Prefabs/Destroyer";
         public const string ASTEROID_SMALL_PREFAB = "Prefabs/Enemies/AsteroidSmall";
         public const string UFO_PATH = "Prefabs/Enemies/UFO";

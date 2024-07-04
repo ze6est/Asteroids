@@ -1,3 +1,4 @@
+using Asteroids.CodeBase.Configs;
 using UnityEngine;
 
 namespace Asteroids.CodeBase.Ships
@@ -5,7 +6,7 @@ namespace Asteroids.CodeBase.Ships
     [RequireComponent(typeof(Rigidbody2D))]
     public class ShipRotator : MonoBehaviour
     {
-        [SerializeField] private float _speed = 2;
+        private float _speed;
         
         private Rigidbody2D _rigidbody;
         private Camera _camera;
@@ -13,6 +14,11 @@ namespace Asteroids.CodeBase.Ships
         private Coroutine _rotateJob;
 
         private Vector2 _lookTo;
+
+        public void Construct(ShipConfig shipConfig)
+        {
+            _speed = shipConfig.RotateSpeed;
+        }
         
         private void Awake()
         {

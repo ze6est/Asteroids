@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnRadius: 10
-  _spawnTime: 1
+  _spawnTime: 3
   _countAsteroidsSmall: 3

@@ -1,6 +1,4 @@
-using Asteroids.CodeBase.Enemies;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Asteroids.CodeBase.Ammunitions
 {
@@ -11,8 +9,12 @@ namespace Asteroids.CodeBase.Ammunitions
         [SerializeField] private float _maxSpeed;
         
         private Rigidbody2D _rigidbody;
-        
-        public event UnityAction EnemieDestroyed;
+
+        public void Construct(float startSpeed, float maxSpeed)
+        {
+            _startSpeed = startSpeed;
+            _maxSpeed = maxSpeed;
+        }
         
         private void Awake() => 
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -24,14 +26,6 @@ namespace Asteroids.CodeBase.Ammunitions
         {
             _rigidbody.AddRelativeForce(_startSpeed * Time.deltaTime * Vector2.up);
             _rigidbody.velocity = Vector2.ClampMagnitude(_rigidbody.velocity, _maxSpeed);
-        }
-        
-        protected virtual void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out Enemie _))
-            {
-                EnemieDestroyed?.Invoke();
-            }
         }
     }
 }
