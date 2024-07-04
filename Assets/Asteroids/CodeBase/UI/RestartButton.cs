@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Asteroids.CodeBase.UI
@@ -8,6 +8,8 @@ namespace Asteroids.CodeBase.UI
     {
         [SerializeField] private Button _restartButton;
 
+        public event UnityAction Click;
+
         private void OnEnable() => 
             _restartButton.onClick.AddListener(Restart);
 
@@ -15,6 +17,6 @@ namespace Asteroids.CodeBase.UI
             _restartButton.onClick.RemoveListener(Restart);
 
         private void Restart() => 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Click?.Invoke();
     }
 }

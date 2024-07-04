@@ -30,6 +30,12 @@ namespace Asteroids.CodeBase
             _bulletSpawner.EnemyDestroyed -= OnEnemieDestroyed;
         }
 
+        public void Restart()
+        {
+            _score = 0;
+            ScoreChanged?.Invoke(_score);
+        }
+
         private void OnEnemieDestroyed()
         {
             _score++;

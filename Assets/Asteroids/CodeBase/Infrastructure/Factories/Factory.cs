@@ -29,6 +29,9 @@ namespace Asteroids.CodeBase.Factories
         public void Release(T obj) =>
             _pool.Release(obj);
 
+        public void Clear() => 
+            _pool.Clear();
+
         private T CreateObject()
         {
             T obj = Object.Instantiate(_prefab, Vector2.zero, Quaternion.identity);

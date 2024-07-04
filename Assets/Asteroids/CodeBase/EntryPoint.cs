@@ -37,6 +37,8 @@ namespace Asteroids.CodeBase
         private Ship _ship;
         private ShipTriggerObserver _shipTriggerObserver;
         private ShipMover _shipMover;
+        private BulletsFactory _bulletsFactory;
+        private LasersFactory _lasersFactory;
         private ShipShooter _shipShooter;
         private ShipRotator _shipRotator;
         private BulletSpawner _bulletSpawner;
@@ -47,8 +49,14 @@ namespace Asteroids.CodeBase
         private ShipInput _shipInput;
 
         private EnemiesSpawner _enemiesSpawner;
+        private AsteroidsFactory _asteroidsFactory;
+        private UfoFactory _ufoFactory;
+        private AsteroidSmallFactory _asteroidSmallFactory;
 
         private Canvas _hud;
+
+        private Restarter _restarter;
+        private RestartButton _restartButton;
         
         private void Awake()
         {
@@ -69,6 +77,62 @@ namespace Asteroids.CodeBase
             
             ConstructHud();
             
+        }
+        
+        private void OnDestroy()
+        {
+            _shipInput.Moved -= _shipMover.OnMoved;
+            _shipInput.Rotated -= _shipRotator.OnRotated;
+            _shipInput.BulletShooted -= _shipShooter.OnBulletShooted;
+            _shipInput.LaserShooted -= _shipShooter.OnLaserShooted;
+        }
+        
+        private void Restart()
+        {
+            _restarter.Restart();
+            _shipMover.Restart();
+            _laserGun.Restart();
+            _scoreCounter.Restart();
+            
+            Ammunition[] ammunitions = _ship.GetComponentsInChildren<Ammunition>();
+
+            foreach (Ammunition ammunition in ammunitions)
+            {
+                switch (ammunition)
+                {
+                    case Bullet bullet:
+                        _bulletsFactory.Release(bullet);
+                        break;
+                    case Laser laser:
+                        _lasersFactory.Release(laser);
+                        break;
+                }
+            }
+            
+            _bulletsFactory.Clear();
+            _lasersFactory.Clear();
+            
+            Enemie[] enemies = _enemiesSpawner.GetComponentsInChildren<Enemie>();
+
+            foreach (Enemie enemy in enemies)
+            {
+                switch (enemy)
+                {
+                    case Asteroid asteroid:
+                        _asteroidsFactory.Release(asteroid);
+                        break;
+                    case Ufo ufo:
+                        _ufoFactory.Release(ufo);
+                        break;
+                    case AsteroidSmall asteroidSmall:
+                        _asteroidSmallFactory.Release(asteroidSmall);
+                        break;
+                }
+            }
+            
+            _asteroidsFactory.Clear();
+            _ufoFactory.Clear();
+            _asteroidSmallFactory.Clear();
         }
 
         private void LoadPrefabs()
@@ -123,11 +187,11 @@ namespace Asteroids.CodeBase
         
         private void ConstructShip()
         {
-            BulletsFactory bulletsFactory = new BulletsFactory(_bulletPrefab, _shipConfig.CapacityBullets, _shipConfig.MaxCountBullets, _ship.transform);
-            _bulletSpawner = new BulletSpawner(bulletsFactory);
+            _bulletsFactory = new BulletsFactory(_bulletPrefab, _shipConfig.CapacityBullets, _shipConfig.MaxCountBullets, _ship.transform);
+            _bulletSpawner = new BulletSpawner(_bulletsFactory);
 
-            LasersFactory lasersFactory = new LasersFactory(_laserPrefab, _shipConfig.CapacityLasers, _shipConfig.MaxCountLasers, _ship.transform);
-            _laserSpawner = new LaserSpawner(lasersFactory);
+            _lasersFactory = new LasersFactory(_laserPrefab, _shipConfig.CapacityLasers, _shipConfig.MaxCountLasers, _ship.transform);
+            _laserSpawner = new LaserSpawner(_lasersFactory);
             
             List<BulletGun> bulletGuns = _ship.GetComponentsInChildren<BulletGun>().ToList();
             _laserGun = _ship.GetComponentInChildren<LaserGun>();
@@ -167,33 +231,31 @@ namespace Asteroids.CodeBase
         {
             Transform container = _enemiesSpawner.transform;
             
-            AsteroidsFactory asteroidsFactory = new AsteroidsFactory(_asteroidPrefab, 10, 10, container);
-            UFOFactory ufoFactory = new UFOFactory(_ufoPrefab, 10, 10, container);
-            AsteroidSmallFactory asteroidSmallFactory = new AsteroidSmallFactory(_asteroidSmallPrefab, 10, 10, container);
+            _asteroidsFactory = new AsteroidsFactory(_asteroidPrefab, 10, 10, container);
+            _ufoFactory = new UfoFactory(_ufoPrefab, 10, 10, container);
+            _asteroidSmallFactory = new AsteroidSmallFactory(_asteroidSmallPrefab, 10, 10, container);
             
-            _enemiesSpawner.Construct(asteroidsFactory, ufoFactory, asteroidSmallFactory, _ship);
+            _enemiesSpawner.Construct(_asteroidsFactory, _ufoFactory, _asteroidSmallFactory, _ship);
         }
 
         private void ConstructHud()
         {
             RestartWindow restartWindow = _hud.GetComponentInChildren<RestartWindow>();
-            
-            if(_hud.TryGetComponent(out Restarter restarter))
+
+            if (_hud.TryGetComponent(out Restarter restarter))
+            {
                 restarter.Construct(_shipTriggerObserver, restartWindow);
+                _restarter = restarter;
+            }
 
             ShipUI shipUI = _hud.GetComponentInChildren<ShipUI>();
             shipUI.Construct(_shipMover, _laserGun);
 
             ScoreCounterView scoreCounterView = restartWindow.GetComponentInChildren<ScoreCounterView>();
             scoreCounterView.Construct(_scoreCounter);
-        }
 
-        private void OnDestroy()
-        {
-            _shipInput.Moved -= _shipMover.OnMoved;
-            _shipInput.Rotated -= _shipRotator.OnRotated;
-            _shipInput.BulletShooted -= _shipShooter.OnBulletShooted;
-            _shipInput.LaserShooted -= _shipShooter.OnLaserShooted;
+            RestartButton restartButton = restartWindow.GetComponentInChildren<RestartButton>();
+            restartButton.Click += Restart;
         }
     }
 }

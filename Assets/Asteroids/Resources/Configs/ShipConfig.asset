@@ -20,3 +20,7 @@ MonoBehaviour:
   _maxCountBullets: 10
   _capacityLasers: 10
   _maxCountLasers: 10
+  _startBulletSpeed: 1
+  _maxBulletSpeed: 4
+  _startLaserSpeed: 1
+  _maxLaserSpeed: 2

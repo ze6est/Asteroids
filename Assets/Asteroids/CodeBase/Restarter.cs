@@ -17,15 +17,16 @@ namespace Asteroids.CodeBase
             _restartWindow.gameObject.SetActive(false);
             _shipTriggerObserver.Died += OnDied;
         }
-        
-        private void Start()
-        {
-            Time.timeScale = 1;
-        }
 
         private void OnDestroy() => 
             _shipTriggerObserver.Died -= OnDied;
 
+        public void Restart()
+        {
+            Time.timeScale = 1;
+            _restartWindow.gameObject.SetActive(false);
+        }
+        
         private void OnDied()
         {
             Time.timeScale = 0;

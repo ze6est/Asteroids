@@ -49,6 +49,13 @@ namespace Asteroids.CodeBase.Guns
                 _isRecharged = false;
             }
         }
+
+        public void Restart()
+        {
+            _isRecharged = true;
+            _currentLaserCharges = _maxLaserCharges;
+            _currentLaserFailureTime = 0;
+        }
         
         private IEnumerator Recharge()
         {

@@ -14,14 +14,14 @@ namespace Asteroids.CodeBase.Spawners.EnemiesSpawners
         [SerializeField] private int _countAsteroidsSmall = 3;
 
         private AsteroidsFactory _asteroidsFactory;
-        private UFOFactory _ufoFactory;
+        private UfoFactory _ufoFactory;
         private AsteroidSmallFactory _asteroidSmallFactory;
         
         private Ship _target;
 
         private Coroutine _spawnEnemieJob;
 
-        public void Construct(AsteroidsFactory asteroidsFactory, UFOFactory ufoFactory, AsteroidSmallFactory asteroidSmallFactory, Ship ship)
+        public void Construct(AsteroidsFactory asteroidsFactory, UfoFactory ufoFactory, AsteroidSmallFactory asteroidSmallFactory, Ship ship)
         {
             _asteroidsFactory = asteroidsFactory;
             _ufoFactory = ufoFactory;

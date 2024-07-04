@@ -6,6 +6,9 @@ namespace Asteroids.CodeBase.Ships
     [RequireComponent(typeof(Rigidbody2D))]
     public class ShipMover : MonoBehaviour
     {
+        private Vector3 _startPosition;
+        private Quaternion _startRotation;
+        
         private float _acceleration;
         private float _deceleration;
         private float _maxSpeed;
@@ -23,14 +26,26 @@ namespace Asteroids.CodeBase.Ships
             _maxSpeed = shipConfig.MaxSpeed;
         }
         
-        private void Awake() => 
+        private void Awake()
+        {
+            _startPosition = transform.position;
+            _startRotation = transform.rotation;
+            
             _rigidbody = GetComponent<Rigidbody2D>();
+        }
 
         private void Update() => 
             Move();
 
         public void OnMoved(float speed) => 
             _moveInput = speed;
+
+        public void Restart()
+        {
+            transform.position = _startPosition;
+            transform.rotation = _startRotation;
+            _rigidbody.velocity = Vector2.zero;
+        }
 
         private void Move()
         {

@@ -3,9 +3,9 @@ using Asteroids.CodeBase.Factories;
 using Asteroids.CodeBase.Spawners;
 using UnityEngine;
 
-public class UFOFactory : Factory<Ufo>
+public class UfoFactory : Factory<Ufo>
 {
-    public UFOFactory(Ufo prefab, int capacity, int maxSize, Transform container) : base(prefab, capacity, maxSize, container)
+    public UfoFactory(Ufo prefab, int capacity, int maxSize, Transform container) : base(prefab, capacity, maxSize, container)
     {
     }
 }
