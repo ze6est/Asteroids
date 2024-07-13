@@ -17,22 +17,28 @@ namespace Asteroids.CodeBase
 {
     public class EntryPoint : MonoBehaviour
     {
-        private Ship _shipPrefab;
-        private Bullet _bulletPrefab;
-        private Laser _laserPrefab;
+        [Header("Ship")]
+        [SerializeField] private Ship _shipPrefab;
+        [SerializeField] private Bullet _bulletPrefab;
+        [SerializeField] private Laser _laserPrefab;
 
-        private EnemiesSpawner _enemiesSpawnerPrefab;
-        private Asteroid _asteroidPrefab;
-        private Ufo _ufoPrefab;
-        private AsteroidSmall _asteroidSmallPrefab;
-
-        private Destroyer _destroyerPrefab;
-        private Canvas _hudPrefab;
+        [Header("Spawner")]
+        [SerializeField] private EnemiesSpawner _enemiesSpawnerPrefab;
+        
+        [Header("Enemies")]
+        [SerializeField] private Asteroid _asteroidPrefab;
+        [SerializeField] private Ufo _ufoPrefab;
+        [SerializeField] private AsteroidSmall _asteroidSmallPrefab;
+        
+        [Header("Configs")]
+        [SerializeField] private ShipConfig _shipConfig;
+        [SerializeField] private EnemiesConfig _enemiesConfig;
+        
+        [Header("Other")]
+        [SerializeField] private Canvas _hudPrefab;
+        [SerializeField] private Destroyer _destroyerPrefab;
         
         private ScoreCounter _scoreCounter;
-
-        private ShipConfig _shipConfig;
-        private EnemiesConfig _enemiesConfig;
 
         private Ship _ship;
         private ShipTriggerObserver _shipTriggerObserver;
@@ -56,13 +62,9 @@ namespace Asteroids.CodeBase
         private Canvas _hud;
 
         private Restarter _restarter;
-        private RestartButton _restartButton;
         
         private void Awake()
         {
-            LoadPrefabs();
-            LoadConfigs();
-            
             ConstructAmmunitionsPrefabs();
             ConstructEnemiesPrefab();
             
@@ -133,28 +135,6 @@ namespace Asteroids.CodeBase
             _asteroidsFactory.Clear();
             _ufoFactory.Clear();
             _asteroidSmallFactory.Clear();
-        }
-
-        private void LoadPrefabs()
-        {
-            _shipPrefab = Resources.Load<Ship>(AssetsPath.SHIP_PATH);
-            _bulletPrefab = Resources.Load<Bullet>(AssetsPath.BULLET_PATH);
-            _laserPrefab = Resources.Load<Laser>(AssetsPath.LASER_PATH);
-
-            _enemiesSpawnerPrefab = Resources.Load<EnemiesSpawner>(AssetsPath.ENEMIES_SPAWNER_PATH);
-            _asteroidPrefab = Resources.Load<Asteroid>(AssetsPath.ASTEROID_PATH);
-            _ufoPrefab = Resources.Load<Ufo>(AssetsPath.UFO_PATH);
-            _asteroidSmallPrefab = Resources.Load<AsteroidSmall>(AssetsPath.ASTEROID_SMALL_PREFAB);
-
-            _destroyerPrefab = Resources.Load<Destroyer>(AssetsPath.DESTROYER);
-
-            _hudPrefab = Resources.Load<Canvas>(AssetsPath.HUD_PATH);
-        }
-
-        private void LoadConfigs()
-        {
-            _shipConfig = Resources.Load<ShipConfig>(AssetsPath.SHIP_CONFIG_PATH);
-            _enemiesConfig = Resources.Load<EnemiesConfig>(AssetsPath.ENEMIES_CONFIG_PATH);
         }
 
         private void InstantiateWorld()
@@ -253,9 +233,8 @@ namespace Asteroids.CodeBase
 
             ScoreCounterView scoreCounterView = restartWindow.GetComponentInChildren<ScoreCounterView>();
             scoreCounterView.Construct(_scoreCounter);
-
-            RestartButton restartButton = restartWindow.GetComponentInChildren<RestartButton>();
-            restartButton.Click += Restart;
+            
+            restartWindow.RestartButton.onClick.AddListener(Restart);
         }
     }
 }

@@ -322,6 +322,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7db1db3bfa2f2748baacc460f0face0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipPrefab: {fileID: 2004677090320348686, guid: 2baa7d10fb33b904388c1f06bba56a30, type: 3}
+  _bulletPrefab: {fileID: 9106014266892048820, guid: 2ea96cc0d646c184187692583494f645, type: 3}
+  _laserPrefab: {fileID: -7716242131946035472, guid: 01854e2dc0cf68f4bbe6dc33c04a3355, type: 3}
+  _enemiesSpawnerPrefab: {fileID: 7689860560373293096, guid: 39677539898316d47b612c2c9bcb6b6f, type: 3}
+  _asteroidPrefab: {fileID: 3733387696212292816, guid: 44ad3be131a8738458607498a214159b, type: 3}
+  _ufoPrefab: {fileID: 1366645582271173258, guid: e963fc7cff220db4a98d577a0a1f4fd3, type: 3}
+  _asteroidSmallPrefab: {fileID: 5077928995957435184, guid: c4b50f51673c78f4bbea7cc3594ba9e8, type: 3}
+  _shipConfig: {fileID: 11400000, guid: ccd3072d74a821347a0007042edef526, type: 2}
+  _enemiesConfig: {fileID: 11400000, guid: 0970c2c577144d248ad43fccae15b7fa, type: 2}
+  _hudPrefab: {fileID: 7810932746546488029, guid: ca8c2d8139d2c384b9a0b9c0b0f71f42, type: 3}
+  _destroyerPrefab: {fileID: 3178997315827731909, guid: 81f88bad93886b24ba37683a62ec92ff, type: 3}
 --- !u!4 &1835066067
 Transform:
   m_ObjectHideFlags: 0
