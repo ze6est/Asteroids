@@ -17,26 +17,7 @@ namespace Asteroids.CodeBase
 {
     public class EntryPoint : MonoBehaviour
     {
-        [Header("Ship")]
-        [SerializeField] private Ship _shipPrefab;
-        [SerializeField] private Bullet _bulletPrefab;
-        [SerializeField] private Laser _laserPrefab;
-
-        [Header("Spawner")]
-        [SerializeField] private EnemiesSpawner _enemiesSpawnerPrefab;
-        
-        [Header("Enemies")]
-        [SerializeField] private Asteroid _asteroidPrefab;
-        [SerializeField] private Ufo _ufoPrefab;
-        [SerializeField] private AsteroidSmall _asteroidSmallPrefab;
-        
-        [Header("Configs")]
-        [SerializeField] private ShipConfig _shipConfig;
-        [SerializeField] private EnemiesConfig _enemiesConfig;
-        
-        [Header("Other")]
-        [SerializeField] private Canvas _hudPrefab;
-        [SerializeField] private Destroyer _destroyerPrefab;
+        [SerializeField] private Prefabs _prefabs;
         
         private ScoreCounter _scoreCounter;
 
@@ -139,10 +120,10 @@ namespace Asteroids.CodeBase
 
         private void InstantiateWorld()
         {
-            _ship = Instantiate(_shipPrefab);
-            _enemiesSpawner = Instantiate(_enemiesSpawnerPrefab);
-            Instantiate(_destroyerPrefab);
-            _hud = Instantiate(_hudPrefab);
+            _ship = Instantiate(_prefabs.ShipPrefab);
+            _enemiesSpawner = Instantiate(_prefabs.EnemiesSpawnerPrefab);
+            Instantiate(_prefabs.DestroyerPrefab);
+            _hud = Instantiate(_prefabs.HudPrefab);
         }
         
         private void EnableInput()
@@ -154,23 +135,23 @@ namespace Asteroids.CodeBase
 
         private void ConstructAmmunitionsPrefabs()
         {
-            _bulletPrefab.Construct(_shipConfig.StartBulletSpeed, _shipConfig.MaxBulletSpeed);
-            _laserPrefab.Construct(_shipConfig.StartLaserSpeed, _shipConfig.MaxBulletSpeed);
+            _prefabs.BulletPrefab.Construct(_prefabs.ShipConfig.StartBulletSpeed, _prefabs.ShipConfig.MaxBulletSpeed);
+            _prefabs.LaserPrefab.Construct(_prefabs.ShipConfig.StartLaserSpeed, _prefabs.ShipConfig.MaxBulletSpeed);
         }
 
         private void ConstructEnemiesPrefab()
         {
-            _asteroidPrefab.Construct(_enemiesConfig.AsteroidSpeed, _enemiesConfig.MaxMovePositionX, _enemiesConfig.MaxMovePositionY);
-            _ufoPrefab.ConstructPrefab(_enemiesConfig.UfoSpeed);
-            _asteroidSmallPrefab.Construct(_enemiesConfig.AsteroidSmallSpeed);
+            _prefabs.AsteroidPrefab.Construct(_prefabs.EnemiesConfig.AsteroidSpeed, _prefabs.EnemiesConfig.MaxMovePositionX, _prefabs.EnemiesConfig.MaxMovePositionY);
+            _prefabs.UfoPrefab.ConstructPrefab(_prefabs.EnemiesConfig.UfoSpeed);
+            _prefabs.AsteroidSmallPrefab.Construct(_prefabs.EnemiesConfig.AsteroidSmallSpeed);
         }
         
         private void ConstructShip()
         {
-            _bulletsFactory = new BulletsFactory(_bulletPrefab, _shipConfig.CapacityBullets, _shipConfig.MaxCountBullets, _ship.transform);
+            _bulletsFactory = new BulletsFactory(_prefabs.BulletPrefab, _prefabs.ShipConfig.CapacityBullets, _prefabs.ShipConfig.MaxCountBullets, _ship.transform);
             _bulletSpawner = new BulletSpawner(_bulletsFactory);
 
-            _lasersFactory = new LasersFactory(_laserPrefab, _shipConfig.CapacityLasers, _shipConfig.MaxCountLasers, _ship.transform);
+            _lasersFactory = new LasersFactory(_prefabs.LaserPrefab, _prefabs.ShipConfig.CapacityLasers, _prefabs.ShipConfig.MaxCountLasers, _ship.transform);
             _laserSpawner = new LaserSpawner(_lasersFactory);
             
             List<BulletGun> bulletGuns = _ship.GetComponentsInChildren<BulletGun>().ToList();
@@ -179,7 +160,7 @@ namespace Asteroids.CodeBase
             if (_ship.TryGetComponent(out ShipMover shipMover))
             {
                 _shipMover = shipMover;
-                shipMover.Construct(_shipConfig);
+                shipMover.Construct(_prefabs.ShipConfig);
             }
                 
             if(_ship.TryGetComponent(out ShipShooter shipShooter))
@@ -188,7 +169,7 @@ namespace Asteroids.CodeBase
             if (_ship.TryGetComponent(out ShipRotator shipRotator))
             {
                 _shipRotator = shipRotator;
-                shipRotator.Construct(_shipConfig);
+                shipRotator.Construct(_prefabs.ShipConfig);
             }
 
             if (_ship.TryGetComponent(out ShipTriggerObserver shipTriggerObserver))
@@ -211,9 +192,9 @@ namespace Asteroids.CodeBase
         {
             Transform container = _enemiesSpawner.transform;
             
-            _asteroidsFactory = new AsteroidsFactory(_asteroidPrefab, 10, 10, container);
-            _ufoFactory = new UfoFactory(_ufoPrefab, 10, 10, container);
-            _asteroidSmallFactory = new AsteroidSmallFactory(_asteroidSmallPrefab, 10, 10, container);
+            _asteroidsFactory = new AsteroidsFactory(_prefabs.AsteroidPrefab, 10, 10, container);
+            _ufoFactory = new UfoFactory(_prefabs.UfoPrefab, 10, 10, container);
+            _asteroidSmallFactory = new AsteroidSmallFactory(_prefabs.AsteroidSmallPrefab, 10, 10, container);
             
             _enemiesSpawner.Construct(_asteroidsFactory, _ufoFactory, _asteroidSmallFactory, _ship);
         }
